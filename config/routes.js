@@ -19,7 +19,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+  '/': { view: 'register' },
   'GET /sparql/query/:createdBy': 'SparqlController.query',
   'POST /sparql/update': 'SparqlController.insert',
   'GET /sparql/query/one/:pcModel': 'SparqlController.getOneProduct',
@@ -101,7 +101,7 @@ module.exports.routes = {
 
   //badge
   'GET /badge':{view:"Badge"},
-  'GET /map':{view:"SimpleMap"},
+
   //ADRESSE ROUTES
   'POST /addAdresse/:id':'AdresseController.SaveUserAdresse',
   'GET /userAdresses/:id':'AdresseController.UserAdresses',
