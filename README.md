@@ -21,6 +21,7 @@ Created a fullstack sails js app using onthologies RDF with apache fuseki databa
 this project includes all the CRUD functionalities along with authentication and authorization 
 included a real time messaging system with the help of socket io and RDF
 this project is mainly for learning purposes so it might not be the best organized but it is fully functional
+project does contain unused functions and controllers, again, this project is simply a learning project not intended for production use
 this project is fully made using javascript
 
 
