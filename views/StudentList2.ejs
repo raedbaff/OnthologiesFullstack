@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Mintos - Responsive Bootstrap 4 Admin Dashboard Template
+Author: Hencework
+Contact: https://hencework.ticksy.com/
+
+License: You must have a valid license purchased only from templatemonster to legally use the template for your project.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Student List</title>
+  <script src="https://unpkg.com/socket.io-client/dist/socket.io.js"></script>
+  <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+
+</head>
+
+<body>
+  <% layout('layout') %>
+    <!-- Main Content -->
+
+    <!-- Breadcrumb -->
+    <nav class="hk-breadcrumb" aria-label="breadcrumb">
+      <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Tables</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Students List</li>
+      </ol>
+    </nav>
+    <!-- /Breadcrumb -->
+
+    <!-- Container -->
+    <div class="container">
+
+      <!-- Title -->
+      <div class="hk-pg-header">
+        <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon"><i
+                data-feather="database"></i></span></span>Data Tables</h4>
+      </div>
+      <!-- /Title -->
+
+      <!-- Row -->
+
+
+
+
+      <div class="row">
+        <div class="col-xl-12">
+          <section class="hk-sec-wrapper">
+            <h5 class="hk-sec-title" style="margin-bottom: 20px;">Students List</h5>
+
+            <!-- <a href="/addStudent"  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" style="margin-left: 20px;">Add new Student</a> -->
+            <!-- Your button to open the modal -->
+            <button type="button" id="openAddStudentFormBtn" class="btn btn-primary">Add New Student</button>
+
+            <!-- The form to add a new student (initially hidden) -->
+            <div id="addStudentFormContainer" style="display: none; margin-top: 20px; margin-bottom: 20px;">
+              <form id="addStudentForm" method="post">
+                <div class="form-group">
+                  <label for="cin">Your Card Id</label>
+                  <div class="input-group">
+
+                    <input class="form-control" id="cin" name="cin" type="number" pattern="[0,9]{8,0}" required>
+                  </div>
+                </div>
+                <div style="display: none;" class="alert alert-inv alert-inv-danger hidden" role="alert" id="message2">
+
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <div class="input-group">
+
+                    <input class="form-control" id="name" name="name" type="text" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="lastname">Last name</label>
+                  <input class="form-control" id="lastname" name="lastname" type="text" required>
+                </div>
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input class="form-control" id="age" name="age" type="number" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="level">Level</label>
+                  <input class="form-control" id="level" name="level" type="text" required>
+                </div>
+                <div class="form-group">
+                  <label for="classe">Class</label>
+                  <select class="form-control" id="classe" name="classe">
+
+                  </select>
+                </div>
+
+
+                <input hidden name="createdBy" id="createdBy">
+
+
+
+
+
+
+
+
+
+                <hr>
+                <button class="btn btn-primary" type="submit">Add Student</button>
+                <div style="display: none; margin-top: 10px;" class="alert alert-inv alert-inv-success hidden"
+                  role="alert" id="message">
+
+                </div>
+
+                <div style="display: none; margin-top: 10px;" class="alert alert-inv alert-inv-danger hidden"
+                  role="alert" id="completeFailure">
+
+                </div>
+              </form>
+              <button style="margin-top: 10px;" class="btn btn-danger" id="cancelAddStudentBtn">Cancel</button>
+            </div>
+
+
+
+            <a href="/home" class="btn btn-warning">Back home</a>
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm">
+                <div class="form-group">
+                  <label for="searchInput">Search:</label>
+                  <input type="text" id="searchInput" class="form-control" placeholder="Enter name or last name">
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-sm">
+                <div class="table-wrap">
+                  <table id="studentTable" class="table table-hover w-100 display pb-30">
+                    <thead>
+                      <tr>
+                        <th>CIN</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Level</th>
+                        <th>Classe</th>
+
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="userList">
+
+                    </tbody>
+                    <tfoot>
+
+
+                    </tfoot>
+
+
+                  </table>
+                  <div id="updateStudentFormContainer" style="display: none; margin-top: 20px; margin-bottom: 20px;">
+                    <form id="updateStudentForm" method="post">
+                      <div class="form-group">
+                        <label for="cin">Your Card Id</label>
+                        <div class="input-group">
+
+                          <input class="form-control" id="cinn" name="cin" type="number" pattern="[0,9]{8,0}" required disabled>
+                        </div>
+                      </div>
+                      
+
+
+
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <div class="input-group">
+
+                          <input class="form-control" id="namee" name="name" type="text" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="lastname">Last name</label>
+                        <input class="form-control" id="lastnamee" name="lastname" type="text" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="age">Age</label>
+                        <input class="form-control" id="agee" name="age" type="number" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="level">Level</label>
+                        <input class="form-control" id="levell" name="level" type="text" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="classe">Class</label>
+                        <select class="form-control" id="classee" name="classe">
+
+                        </select>
+                      </div>
+
+
+                      
+
+
+
+
+
+
+
+
+
+                      <hr>
+                      <button class="btn btn-primary" type="submit">Edit Student</button>
+                      <div style="display: none; margin-top: 10px;" class="alert alert-inv alert-inv-success hidden"
+                        role="alert" id="editSuccessMessage">
+                        <div style="display: none; margin-top: 10px;" class="alert alert-inv alert-inv-danger hidden" role="alert"
+                        id="editFailureMessage">
+
+                      </div>
+
+                      </div>
+
+                      <div style="display: none; margin-top: 10px;" class="alert alert-inv alert-inv-danger hidden"
+                        role="alert" id="completeFailure">
+
+                      </div>
+                    </form>
+                    <button style="margin-top: 10px;" class="btn btn-danger" id="cancelupdateStudentBtn">Cancel</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </section>
+          <script>
+            function fetchSalles2() {
+              const user = localStorage.getItem("user");
+              console.log("this user is " + user);
+              fetch(`/salle/user2/${user}`)
+                .then((response) => response.json())
+                .then((data) => {
+                  const theSelect = document.getElementById("classee")
+
+
+                  data.mySalles.forEach((sallee) => {
+                    const option = document.createElement("option");
+                    option.value = sallee.id_salle.value
+                    option.textContent = sallee.libelle_salle.value;
+                    theSelect.appendChild(option)
+                  });
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+
+
+            }
+            function openUpdate(cin) {
+              fetchSalles2()
+              const currentRow = document.getElementById(`row_${cin}`);
+              const formContainer = document.getElementById("updateStudentFormContainer");
+
+              // Fetch student data
+              fetch(`/getsinglestudent/${cin}`)
+                .then((response) => response.json())
+                .then((data) => {
+                  const student = data.Student[0];
+                  // Populate form fields with student data
+                  document.getElementById("cinn").value = student.cin.value;
+                  document.getElementById("namee").value = student.name.value;
+                  document.getElementById("lastnamee").value = student.lastname.value;
+                  document.getElementById("agee").value = student.age.value;
+                  document.getElementById("levell").value = student.level.value;
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+
+              // Toggle the display of the form container
+              const currentDisplayValue = formContainer.style.display;
+              formContainer.style.display = currentDisplayValue === "block" ? "none" : "block";
+
+              // Handle background color based on the final state of the form container
+              if (formContainer.style.display === "none") {
+                currentRow.style.removeProperty("background-color");
+              } else {
+                currentRow.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
+              }
+
+              // Add event listener to the "Cancel" button
+              document.getElementById("cancelupdateStudentBtn").addEventListener("click", function () {
+                document.getElementById("updateStudentFormContainer").style.display = "none";
+                currentRow.style.removeProperty("background-color");
+              });
+            }
+
+
+            function fetchSalles() {
+              const user = localStorage.getItem("user");
+              console.log("this user is " + user);
+              fetch(`/salle/user2/${user}`)
+                .then((response) => response.json())
+                .then((data) => {
+                  const theSelect = document.getElementById("classe")
+
+
+                  data.mySalles.forEach((sallee) => {
+                    const option = document.createElement("option");
+                    option.value = sallee.id_salle.value
+                    option.textContent = sallee.libelle_salle.value;
+                    theSelect.appendChild(option)
+                  });
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+
+
+            }
+            function deleteStudent(cin) {
+              fetch(`/deleteStudent/${cin}`, {
+                method: 'POST',
+              })
+                .then((response) => {
+                  if (response.ok) {
+                    fetchStudent()
+
+                  }
+                })
+                .catch((error) => {
+                  console.error('Error occurred while deleting student:', error);
+                });
+            }
+            function fetchStudent() {
+              const user = localStorage.getItem("user");
+              console.log("this user is " + user);
+              fetch(`/getAllStudents2/${user}`)
+                .then((response) => response.json())
+                .then((data) => {
+                  const userListElement = document.getElementById("userList");
+                  while (userListElement.firstChild) {
+                    userListElement.removeChild(userListElement.firstChild);
+                  }
+
+                  data.students.forEach((student) => {
+                    const row = document.createElement("tr");
+                    const cinCell = document.createElement("td");
+                    const nameCell = document.createElement("td");
+                    const lastNameCell = document.createElement("td");
+                    const ageCell = document.createElement("td");
+                    const LevelCell = document.createElement("td");
+                    const ClassCell = document.createElement("td");
+                    const ButtonCell = document.createElement("td");
+                    const ButtonCell2 = document.createElement("td");
+
+                    cinCell.textContent = student.cin.value;
+                    nameCell.textContent = student.name.value;
+                    lastNameCell.textContent = student.lastname.value;
+                    ageCell.textContent = student.age.value;
+                    LevelCell.textContent = student.level.value;
+                    ClassCell.textContent = student.libelle_salle.value
+                    const deleteLink = document.createElement("a");
+                    deleteLink.href = "#";
+                    deleteLink.style.color = "red";
+                    deleteLink.textContent = "Delete";
+                    deleteLink.addEventListener("click", function () {
+                      deleteStudent(student.cin.value);
+                    });
+
+                    ButtonCell.appendChild(deleteLink);
+                    const updateLink = document.createElement("a");
+                    updateLink.href = "#";
+                    updateLink.style.color = "green";
+                    updateLink.textContent = "Update";
+                    updateLink.addEventListener("click", function () {
+                      openUpdate(student.cin.value);
+                    });
+                    ButtonCell2.appendChild(updateLink)
+                    row.appendChild(cinCell)
+                    row.appendChild(nameCell);
+                    row.appendChild(lastNameCell);
+                    row.appendChild(ageCell);
+                    row.appendChild(LevelCell);
+                    row.appendChild(ClassCell);
+                    row.appendChild(ButtonCell);
+                    row.appendChild(ButtonCell2)
+                    row.id = `row_${student.cin.value}`
+
+                    userListElement.appendChild(row);
+                    const searchInput = document.getElementById("searchInput");
+                    const tableRows = document.querySelectorAll("#studentTable #userList tr");
+                    console.log("Number of table rows:", tableRows.length);
+
+                    searchInput.addEventListener("input", function () {
+                      const searchText = searchInput.value.toLowerCase();
+                      console.log("the search " + searchText)
+                      tableRows.forEach(function (row) {
+                        const name = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                        console.log("the name is " + name)
+                        const lastName = row.querySelector("td:nth-child(3)").textContent.toLowerCase();
+                        if (name.includes(searchText) || lastName.includes(searchText)) {
+                          console.log("true or false : " + name.includes(searchText))
+                          row.style.display = "table-row";
+                        } else {
+                          row.style.display = "none";
+                        }
+                      });
+                    });
+
+                  });
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+
+
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+              fetchStudent()
+              fetchSalles()
+              document.getElementById("openAddStudentFormBtn").addEventListener("click", function () {
+                document.getElementById("addStudentFormContainer").style.display = "block"
+              })
+              document.getElementById("cancelAddStudentBtn").addEventListener("click", function () {
+                document.getElementById("addStudentFormContainer").style.display = "none"
+              })
+
+
+              document.getElementById("addStudentForm").addEventListener("submit", function (event) {
+
+                event.preventDefault();
+                const user = localStorage.getItem("user")
+                document.getElementById("createdBy").value = user;
+                const formData = new FormData(event.target);
+
+                fetch("/saveStudent2", {
+                  method: "POST",
+                  body: formData,
+                })
+                  .then((response) => {
+
+                    if (!response.ok) {
+                      throw new Error("Something went wrong ");
+                    }
+                    return response.json()
+
+                  })
+                  .then((data) => {
+                    if (data.message === "this cin already exists") {
+                      document.getElementById("message2").textContent = data.message;
+                      document.getElementById("message2").style.display = "block"
+                      setTimeout(() => {
+                        document.getElementById("message2").textContent = "";
+                        document.getElementById("message2").style.display = "none"
+
+
+                      }, 2000);
+
+                    }
+                    if (data.message === "added student successfully") {
+                      document.getElementById("addStudentForm").reset();
+                      document.getElementById("message").textContent = data.message;
+                      document.getElementById("message").style.display = "block"
+
+                      fetchStudent()
+
+                      setTimeout(() => {
+                        document.getElementById("message").textContent = "";
+                        document.getElementById("message").style.display = "none"
+
+                      }, 2000);
+
+                    }
+
+                  })
+
+
+                  .catch((error) => {
+                    console.error("Error:", error);
+                    document.getElementById("completeFailure").textContent = "Server is down !! please try again later";
+                    document.getElementById("completeFailure").style.display = "block"
+                    setTimeout(() => {
+                      document.getElementById("completeFailure").textContent = "";
+                      document.getElementById("completeFailure").style.display = "none"
+
+                    }, 2000);
+                  });
+
+                // Hide the form after successful form submission
+
+              });
+              document.getElementById("updateStudentForm").addEventListener("submit",function(e){
+                e.preventDefault()
+                const formData = new FormData(event.target);
+                const cin=document.getElementById("cinn").value
+                console.log("hte cin is the followings : "+cin)
+                fetch(`/updateStudent/${cin}`,{
+                  method:"POST",
+                  body:formData
+                }).then((response)=> response.json())
+                .then((data)=>{
+                  if (data.message==="successfully updated student"){
+                    fetchStudent()
+                    const theMessage=document.getElementById("editSuccessMessage")
+                    theMessage.textContent=data.message
+                    theMessage.style.display="block"
+                    setTimeout(() => {
+                      theMessage.textContent=""
+                      theMessage.style.display="none"
+                      
+                    }, 2000);
+                    
+
+                  }
+                })
+                .catch((error)=>{
+                  const failureMessage=document.getElementById("editFailureMessage")
+                  failureMessage.textContent="Something went wrong while updating Student, please try again later"
+                  failureMessage.style.display="block"
+                  setTimeout(() => {
+                    failureMessage.textContent=""
+                    failureMessage.style.display="none"
+                    
+                  }, 2000);
+                })
+
+
+              })
+
+
+            });
+          </script>
+
+
+
+
+        </div>
+      </div>
+
+
+
+      <!-- /Row -->
+
+    </div>
+    <!-- /Container -->
+
+
+
+
+    <!-- /Main Content -->
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Mintos - Responsive Bootstrap 4 Admin Dashboard Template
+Author: Hencework
+Contact: https://hencework.ticksy.com/
+
+License: You must have a valid license purchased only from templatemonster to legally use the template for your project.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Cours</title>
+    <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+</head>
+
+<body>
+    <% layout('layout') %>
+        <!-- Main Content -->
+
+
+
+        <!-- Container -->
+
+        <!-- Container -->
+        <div class="container-fluid">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-xl-12 pa-0">
+                    <div class="calendarapp-wrap">
+                        <div class="calendarapp-sidebar">
+                            <div class="nicescroll-bar">
+                                <a id="close_calendarapp_sidebar" href="javascript:void(0)"
+                                    class="close-calendarapp-sidebar">
+                                    <span class="feather-icon"><i data-feather="chevron-left"></i></span>
+                                </a>
+                                
+                                
+                                <button type="button" class="btn btn-primary btn-block mt-50 mb-20" data-toggle="modal"
+                                    data-target="#exampleModalEmail">
+                                    Ajouter Cours
+                                </button>
+                            </div>
+                        </div>
+
+                        <div  class="calendar-wrap ">
+                            <div  id="calendar"></div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', async function () {
+                                    
+                                    
+                                    document.getElementById("addEventForm").addEventListener("submit", async function (e) {
+                                        e.preventDefault()
+                                        const formdata = new FormData(e.target)
+                                        console.log("all the data :"+formdata.get("day"),formdata.get("startDate"),formdata.get("endDate"),formdata.get("createdBy"),formdata.get("classe"))
+                                        try {
+                                            const response = await fetch("http://localhost:1337/SaveCourse", {
+                                                method: "POST",
+                                                body: formdata
+                                            });
+                                            if (response.ok) {
+                                                const responseData=await response.json()
+                                                if (responseData.message=="added Course successfully"){
+                                                    await refreshCalendarEvents();
+                                                    document.getElementById("message").textContent = responseData.message;
+                                                    document.getElementById("message").style.display = "block"
+                                                    setTimeout(() => {
+                                                        document.getElementById("message").textContent = "";
+                                                        document.getElementById("message").style.display = "none"
+
+
+                                                    }, 2000);
+                                                }
+                                                
+                                            }
+                                        } catch (error) {
+                                            console.error(error);
+                                        }
+
+
+                                    })
+                                    const fetchData = async () => {
+                                        try {
+                                            const response = await fetch("http://localhost:1337/courses/130f8655-e5c6-4456-833c-29196fba1ac5");
+                                            const data = await response.json();
+
+                                            const events = [];
+
+
+
+
+                                            data.courses.forEach((seance) => {
+
+
+                                                const startDateTime = `${seance.day.value}T${seance.startDate.value}:00`;
+                                                const endDateTime = `${seance.day.value}T${seance.endDate.value}:00`;
+                                                events.push({
+                                                    title: seance.CourseName.value,
+                                                    start: startDateTime,
+                                                    end: endDateTime,
+
+
+                                                });
+
+
+                                            });
+
+
+
+                                            return events;
+                                        } catch (error) {
+                                            console.error(error);
+                                            return [];
+                                        }
+                                    };
+
+
+                                    $('#calendar').fullCalendar('removeEvents');
+
+                                    $('#calendar').fullCalendar('addEventSource', {
+                                        locale: 'fr',
+                                        events: await fetchData(),
+
+
+
+                                    });
+                                    const refreshCalendarEvents = async () => {
+                                        const newEvents = await fetchData();
+
+                                        $('#calendar').fullCalendar('removeEvents');
+                                        $('#calendar').fullCalendar('addEventSource', {
+                                            locale: 'fr',
+                                            events: newEvents,
+                                        });
+                                    };
+
+
+
+
+
+                                    // Add more events here...
+
+
+
+
+                                });
+                            </script>
+
+
+                            
+
+                        </div>
+                        <!-- Compose email -->
+                        <div class="modal fade" id="exampleModalEmail" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalEmail" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-grey-dark-5">
+                                        <h6 class="modal-title text-white" id="exampleModalPopoversLabel">Add new event
+                                        </h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="addEventForm" method="post">
+                                            <div class="form-group">
+                                                <label for="CourseName">Nom du cours</label>
+                                                <input type="text" placeholder="ex:Anglais" id="CourseName"
+                                                    name="CourseName" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="day">Jours</label>
+                                                <input type="date" name="day" id="day" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="startDate">Temps de début</label>
+                                                <input type="time" id="startDate" name="startDate"
+                                                    class="form-control ">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="endDate">Temps du fin </label>
+                                                <input type="time" id="endDate" name="endDate" class="form-control ">
+                                            </div>
+                                            <!-- <div class="form-group custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="all_day">
+                                                <label class="custom-control-label" for="all_day">All day event</label>
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <label for="inputTime">Set Priority</label>
+                                                <select class="form-control custom-select">
+                                                    <option selected>Important</option>
+                                                    <option>Normal</option>
+                                                    <option>Important</option>
+                                                </select>
+                                            </div> -->
+                                            <input type="text" name="createdBy" id="createdBy" value="raed baffoun"
+                                                hidden>
+                                            <input type="text" name="classe" id="classe"
+                                                value="130f8655-e5c6-4456-833c-29196fba1ac5" hidden>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-block mr-10"
+                                                    type="submit">Ajouter</button>
+                                                    <div style="display: none; margin-top: 10px;" class="alert alert-inv alert-inv-success hidden" role="alert"
+                                                        id="message">
+                                                    
+                                                    </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Compose email -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Row -->
+
+        </div>
+        <!-- /Container -->
+
+        <!-- /Container -->
+
+
+
+
+        <!-- /Main Content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

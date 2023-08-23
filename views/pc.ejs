@@ -1,0 +1,122 @@
+<!-- views/sparql-results.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PC LIST</title>
+</head>
+
+<body>
+  <!-- <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <% if (req.session.pcList.length >0) { %>
+      <h1 style="font-size: 28px; font-weight: bold; margin-bottom: 20px;">MY PCS</h1>
+      
+<div class="relative overflow-x-auto">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+              <th scope="col" class="px-6 py-3">
+                  PC Model
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Price
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Mouse Model
+              </th>
+              <th scope="col" class="px-6 py-3">
+                  Mouse Type
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Action
+            </th>
+          </tr>
+      </thead>
+      <tbody>
+        <% for (const result of req.session.pcList) { %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= result.PCModel.value %>
+              </th>
+              <td class="px-6 py-4">
+                <%= result.PCPrice.value %>
+              </td>
+              <td class="px-6 py-4">
+                <%= result.mouseModel.value %>
+              </td>
+              <td class="px-6 py-4">
+                <%= result.mouseType.value %>
+              </td>
+              <td>
+                <div class="flex flex-row">
+                  <a href="/sparql/query/one/<%= result.PCModel.value %>" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Details</a>
+                  <form method="post" action="/sparql/delete/<%= result.id.value %>" class="inline">
+                    <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                  </form>
+
+                </div>
+                
+              </td>
+          </tr>
+          
+          <% } %>
+      </tbody>
+  </table>
+</div>
+
+    <% } else { %>
+      <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">Nothing to show yet, Maybe add a new pc ?</h1>
+    <% } %>
+    <div class="mt-3">
+      <a href="/addPc"  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add new pc</a>
+    <a href="/home" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Back home</a>
+
+    </div>
+    
+  </div> -->
+  
+  <% if (req.session.pcList.length >0) { %>
+  <section class="hk-sec-wrapper">
+    
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">PC and mouse list of <%= req.session.result.username %></h1>
+    <p class="mb-40">Here you can view and delete all your added pc and mouse list</p>
+    <div class="row">
+        <div class="col-sm">
+            <div class="row">
+              <% for (const result of req.session.pcList) { %>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-30">
+                    <div class="card">
+                        <div class="card-header">
+                          Pc Model : <%= result.PCModel.value %>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">PC Price : <%= result.PCPrice.value %></h5>
+                            <p class="card-text">Mouse Model : <%= result.mouseModel.value %></p>
+                            <p class="card-text"> Mouse Type : <%= result.mouseType.value %></p>
+                            <a href="/sparql/query/one/<%= result.PCModel.value %>" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Details</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                          <form method="post" action="/sparql/delete/<%= result.id.value %>" class="inline">
+                            <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</section>
+<% } else { %>
+  <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black">Nothing to show yet, Maybe add a new pc ?</h1>
+<% } %>
+<div class="mt-3 ml-3">
+  <a href="/addPc"  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Add new pc</a>
+<a href="/home" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Back home</a>
+
+</div>
+</body>
+</html>
+

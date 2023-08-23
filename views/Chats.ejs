@@ -1,0 +1,421 @@
+<!-- views/home.ejs -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Chats</title>
+    <script type="text/javascript" src="../dependencies/sails.io.js"></script>
+    <script type="text/javascript">
+        // Configure Sails socket client
+        io.sails.url = 'http://localhost:1337'; // Change to your server URL
+        io.sails.autoConnect = true; // Automatically connect
+    </script>
+
+
+
+</head>
+
+<body>
+    <% layout('layout') %>
+        <div class="container-fluid">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-xl-12 pa-0">
+                    <div class="chatapp-wrap">
+                        <div class="chatapp-left">
+                            <header>
+                                <a href="javascript:void(0)" class="chat-more">
+                                    <span class="feather-icon"><i data-feather="more-vertical"></i></span>
+                                </a>
+                                <span class="">Chats</span>
+                                <a href="javascript:void(0)" class="chat-compose">
+                                    <span class="feather-icon"><i data-feather="edit"></i></span>
+                                </a>
+                            </header>
+                            <form role="search" class="chat-search">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="feather-icon"><i data-feather="search"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                            </form>
+                            <div class="chatapp-users-list">
+                                <div id="scroller" class="nicescroll-bar">
+                                    <!-- <a href="javascript:void(0);" class="media">
+                                <div class="media-img-wrap">
+                                    <div class="avatar">
+                                        <img id="user_img" src="dist/img/avatar1.jpg" alt="user" class="avatar-img rounded-circle">
+                                    </div>
+                                    <span class="badge badge-warning badge-indicator"></span>
+                                </div>
+                                <div class="media-body">
+                                    <div>
+                                        <div id="user_name" class="user-name">Clay Masse</div>
+                                        <div id="user_chat" class="user-last-chat">No one saves us but ourselves.</div>
+                                    </div>
+                                    <div>
+                                        <div class="last-chat-time block">5 min</div>
+                                        <div class="badge badge-success badge-pill">15</div>
+                                    </div>
+                                </div>
+                            </a> -->
+                                    <div class="chat-hr-wrap">
+                                        <hr>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chatapp-right">
+                            <header>
+                                <a id="back_user_list" href="javascript:void(0)" class="back-user-list">
+                                    <span class="feather-icon"><i data-feather="chevron-left"></i></span>
+                                </a>
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar">
+                                            <img id="topMenuImage" src="../dependencies/dist/img/avatarEmpty.jpg"
+                                                alt="user" class="avatar-img rounded-circle">
+                                        </div>
+                                        <span class="badge badge-success badge-indicator"></span>
+                                    </div>
+                                    <div class="media-body">
+                                        <strong id="usernameMenu" class="user-name">User</strong>
+                                        <div class="user-status">online</div>
+                                    </div>
+                                </div>
+                                <div class="chat-options-wrap">
+                                    <a href="javascript:void(0)" class=""><span class="feather-icon"><i
+                                                data-feather="video"></i></span></a>
+                                    <a href="javascript:void(0)" class=""><span class="feather-icon"><i
+                                                data-feather="phone"></i></span></a>
+                                </div>
+                            </header>
+                            <div class="chat-body">
+                                <div class="nicescroll-bar">
+                                    <ul id="message-list" class="list-unstyled">
+
+                                        <!-- <li class="media received">
+                                    <div class="avatar">
+                                        <img src="dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="msg-box">
+                                            <div>
+                                                <p>Hey Ben, just a reminder that you are coming for the meeting today in the conference. We are proposing a change in the client briefing.</p>
+                                                <span class="chat-time">2:35 PM</span>
+                                                <div class="arrow-triangle-wrap">
+                                                    <div class="arrow-triangle right"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="media sent">
+                                    <div class="media-body">
+                                        <div class="msg-box">
+                                            <div>
+                                                <p>Sure, on my way to office. Please give me quick update.</p>
+                                                <span class="chat-time">11:45 AM</span>
+                                                <div class="arrow-triangle-wrap">
+                                                    <div class="arrow-triangle left"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li> -->
+                                        <li class="day-sep">today</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <footer>
+                                <form id="sendMessageForm" method="POST" class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="btn-file  btn btn-light">
+                                            <div class="btn-icon-wrap">
+                                                <span class="feather-icon"><i data-feather="paperclip"></i></span>
+                                                <input type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="Content" name="Content" class="input-msg-send form-control"
+                                        placeholder="Type something">
+                                    <div class="input-group-append">
+                                        <!-- <button type="button" class="btn  btn-light  dropdown-toggle no-caret" data-toggle="dropdown"><span class="feather-icon"><i data-feather="at-sign"></i></span></button> -->
+                                        <button type="submit"> send</button>
+                                    </div>
+                                </form>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Row -->
+
+        </div>
+
+
+
+
+
+
+        <script>
+
+            var clickedId
+            function getMessagesBetweenUsers(id, username, photo) {
+                clickedId = id;
+                const userid = localStorage.getItem("id")
+                console.log("you click on the user id :" + id)
+                fetch(`http://localhost:1337/messages/${id}/${userid}`, {
+                    method: "GET"
+                }).then((response) => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                }).then((data) => {
+
+                    var messageList = document.getElementById("message-list");
+                    messageList.innerHTML = ""
+                    data.messages.forEach((message) => {
+                        console.log("here is the photo : " + photo)
+                        document.getElementById("usernameMenu").textContent = username
+                        const imagename = photo.split(".")[0]
+                        const ext = photo.split(".")[1]
+                        document.getElementById("topMenuImage").src = `http://localhost:1337/images/${imagename}/${ext}`
+                        console.log("the message : " + message.Content.value);
+
+
+
+                        const liElement = document.createElement("li");
+                        liElement.className = message.senderId.value === userid ? "media sent" : "media received";
+
+
+
+                        const mediaBodyDiv = document.createElement("div");
+                        mediaBodyDiv.className = "media-body";
+
+                        const msgBoxDiv = document.createElement("div");
+                        msgBoxDiv.className = "msg-box";
+                        const outsideDiv = document.createElement("div")
+
+                        const messageText = document.createElement("p");
+                        messageText.textContent = message.Content.value;
+
+                        const chatTimeSpan = document.createElement("span");
+                        chatTimeSpan.className = "chat-time";
+                        var timestamp = message.timestamp.value;
+                        var timestamp1 = timestamp.split("T")[1];
+                        var timestamp2 = timestamp1.split(".")[0];
+                        chatTimeSpan.textContent = timestamp2;
+
+                        const arrowTriangleWrapDiv = document.createElement("div");
+                        arrowTriangleWrapDiv.className = "arrow-triangle-wrap";
+
+                        const arrowTriangleDiv = document.createElement("div");
+                        arrowTriangleDiv.className = message.senderId.value === userid ? "arrow-triangle left" : "arrow-triangle right";
+
+                        arrowTriangleWrapDiv.appendChild(arrowTriangleDiv);
+                        outsideDiv.appendChild(messageText);
+                        outsideDiv.appendChild(chatTimeSpan);
+                        outsideDiv.appendChild(arrowTriangleWrapDiv);
+
+                        msgBoxDiv.appendChild(outsideDiv);
+
+                        mediaBodyDiv.appendChild(msgBoxDiv);
+                        liElement.appendChild(mediaBodyDiv);
+
+                        messageList.appendChild(liElement);
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                })
+
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                var socket = io.sails.connect();
+                socket.on('connect', function () {
+                    console.log("connected");
+
+
+
+                });
+                fetch("http://localhost:1337/sparql/users/all", {
+                    method: "GET"
+                }).then((response) => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                }).then((data) => {
+                    console.log("the first user is " + data.results.bindings[0].photo.value)
+                    data.results.bindings.forEach((user) => {
+                        if (user.id.value !== localStorage.getItem("id")) {
+                            const imagename = user.photo.value.split(".")[0]
+                            const ext = user.photo.value.split(".")[1]
+                            const linkElement = document.createElement('a');
+                            linkElement.href = "javascript:void(0);";
+                            linkElement.className = "media";
+                            linkElement.onclick = function () {
+                                getMessagesBetweenUsers(user.id.value, user.username.value, user.photo.value)
+                            }
+
+                            // Create the media-img-wrap div
+                            const mediaImgWrapDiv = document.createElement('div');
+                            mediaImgWrapDiv.className = "media-img-wrap";
+
+                            // Create the avatar div
+                            const avatarDiv = document.createElement('div');
+                            avatarDiv.className = "avatar";
+
+
+                            // Create the avatar image
+                            const avatarImg = document.createElement('img');
+                            avatarImg.src = `http://localhost:1337/images/${imagename}/${ext}`;
+                            avatarImg.alt = "user";
+                            avatarImg.className = "avatar-img rounded-circle";
+
+                            // Append the avatar image to the avatar div
+                            avatarDiv.appendChild(avatarImg);
+
+                            // Create the badge element
+                            const badgeElement = document.createElement('span');
+                            badgeElement.className = "badge badge-warning badge-indicator";
+
+                            // Append the badge element to the media-img-wrap div
+                            mediaImgWrapDiv.appendChild(avatarDiv);
+                            mediaImgWrapDiv.appendChild(badgeElement);
+
+                            // Create the media-body div
+                            const mediaBodyDiv = document.createElement('div');
+                            mediaBodyDiv.className = "media-body";
+
+                            // Create the first inner div
+                            const innerDiv1 = document.createElement('div');
+
+                            // Create user name and last chat elements
+                            const userNameDiv = document.createElement('div');
+                            userNameDiv.id = 'user_name';
+                            userNameDiv.className = 'user-name';
+                            userNameDiv.textContent = user.username.value;
+
+                            const userLastChatDiv = document.createElement('div');
+                            userLastChatDiv.className = 'user-last-chat';
+                            userLastChatDiv.textContent = 'No one saves us but ourselves.';
+
+                            innerDiv1.appendChild(userNameDiv);
+                            innerDiv1.appendChild(userLastChatDiv);
+
+                            // Create the second inner div
+                            const innerDiv2 = document.createElement('div');
+
+                            // Create last chat time and badge elements
+                            const lastChatTimeDiv = document.createElement('div');
+                            lastChatTimeDiv.className = 'last-chat-time block';
+                            lastChatTimeDiv.textContent = '5 min';
+
+                            const badgeDiv = document.createElement('div');
+                            badgeDiv.className = 'badge badge-success badge-pill';
+                            badgeDiv.textContent = '15';
+
+                            innerDiv2.appendChild(lastChatTimeDiv);
+                            innerDiv2.appendChild(badgeDiv);
+
+                            // Append inner divs to the media-body div
+                            mediaBodyDiv.appendChild(innerDiv1);
+                            mediaBodyDiv.appendChild(innerDiv2);
+
+                            // Append media-img-wrap and media-body divs to the link element
+                            linkElement.appendChild(mediaImgWrapDiv);
+                            linkElement.appendChild(mediaBodyDiv);
+
+                            // Append the link element to the document
+                            document.getElementById("scroller").appendChild(linkElement);
+
+                        }
+
+
+
+                    })
+                })
+
+                document.getElementById("sendMessageForm").addEventListener("submit", function (e) {
+                    const userid = localStorage.getItem("id")
+                    e.preventDefault()
+                    const formdata = new FormData(e.target)
+
+                    console.log("the content about to be sent : " + formdata.get("Content"))
+                    fetch(`http://localhost:1337/sendMessage/${userid}/${clickedId}`, {
+                        method: "POST",
+                        body: formdata
+                    }).then((response) => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                    }).then((data) => {
+
+                        console.log("sent with success")
+                        document.getElementById("sendMessageForm").reset()
+                    })
+
+                })
+                socket.on(`Message${localStorage.getItem("id")}`, function (data) {
+                    console.log("Sent a new message:" + data.message.Content);
+                    if ((data.message.senderId===localStorage.getItem("id") && data.message.ReceiverId===clickedId) || (data.message.senderId===clickedId && data.message.ReceiverId===localStorage.getItem("id")))
+                    {
+                        var messageList = document.getElementById("message-list");
+                    const liElement = document.createElement("li");
+                        liElement.className = data.message.senderId==localStorage.getItem("id")? "media sent" :"media received";
+
+
+
+                        const mediaBodyDiv = document.createElement("div");
+                        mediaBodyDiv.className = "media-body";
+
+                        const msgBoxDiv = document.createElement("div");
+                        msgBoxDiv.className = "msg-box";
+                        const outsideDiv = document.createElement("div")
+
+                        const messageText = document.createElement("p");
+                        messageText.textContent = data.message.Content;
+
+                        const chatTimeSpan = document.createElement("span");
+                        chatTimeSpan.className = "chat-time";
+                        var timestamp = data.message.timestamp;
+                        var timestamp1 = timestamp.split("T")[1];
+                        var timestamp2 = timestamp1.split(".")[0];
+                        chatTimeSpan.textContent = timestamp2;
+
+                        const arrowTriangleWrapDiv = document.createElement("div");
+                        arrowTriangleWrapDiv.className = data.message.senderId===localStorage.getItem("id")? "arrow-triangle-wrap" : "arrow-triangle right";
+
+                        const arrowTriangleDiv = document.createElement("div");
+                        arrowTriangleDiv.className = "arrow-triangle left"
+
+                        arrowTriangleWrapDiv.appendChild(arrowTriangleDiv);
+                        outsideDiv.appendChild(messageText);
+                        outsideDiv.appendChild(chatTimeSpan);
+                        outsideDiv.appendChild(arrowTriangleWrapDiv);
+
+                        msgBoxDiv.appendChild(outsideDiv);
+
+                        mediaBodyDiv.appendChild(msgBoxDiv);
+                        liElement.appendChild(mediaBodyDiv);
+
+                        messageList.appendChild(liElement);
+
+                    }
+                    
+                    
+                    // Add your code to display the new message here
+                });
+               
+
+            })
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sails Socket Client Test</title>
+  <script type="text/javascript" src="../dependencies/sails.io.js"></script>
+  <script type="text/javascript">
+    // Configure Sails socket client
+    io.sails.url = 'http://localhost:1337'; // Change to your server URL
+    io.sails.autoConnect = true; // Automatically connect
+  </script>
+</head>
+
+<body>
+  <% layout('layout') %>
+    <h1>Sails Socket Client Test</h1>
+    <input type="text" id="messageInput" placeholder="Enter a message">
+    <button id="sendMessageBtn">Send</button>
+    <div id="messages"></div>
+
+    <script>
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var messageDiv=document.getElementById("messages")
+        var socket = io.sails.connect();
+        socket.on('connect', function () {
+          console.log("connected");
+          
+
+        });
+
+        // Request the greeting message
+        socket.get('/broadcast-greeting', function (data) {
+          console.log("the response is " + data);
+        });
+       
+        document.getElementById("sendMessageBtn").addEventListener("click",function(){
+          var message=document.getElementById("messageInput").value
+          socket.post("/sendMessage",{message:message},function(data){
+            console.log("the send controller data :"+data)
+          })
+        })
+        console.log("before")
+        io.sails.connect().on("hola", function (data) {
+          var messageDiv = document.getElementById("messages");
+          var newMessageElement = document.createElement("p");
+          newMessageElement.textContent = data.greeting;
+          messageDiv.appendChild(newMessageElement);
+
+        });
+        // Set up the 'hola' event listener after receiving the response
+        console.log("after with the changes")
+
+      });
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Mintos - Responsive Bootstrap 4 Admin Dashboard Template
+Author: Hencework
+Contact: https://hencework.ticksy.com/
+
+License: You must have a valid license purchased only from templatemonster to legally use the template for your project.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Google Map</title>
+
+    <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+
+
+</head>
+
+<body>
+    <% layout('layout') %>
+
+        <div id="map" style="width: 100%; height: 1000px; padding: 20px;"></div>
+        <script>
+            function initMap() {
+                if ("geolocation" in navigator) {
+                    // Get the user's current position
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
+                        // Create a map centered at the specified coordinates
+                        const map = new google.maps.Map(document.getElementById("map"), {
+                            center: { lat: userLatLng.lat, lng: userLatLng.lng },
+                            zoom: 8,
+                        });
+
+                        // Add a marker to the specified coordinates
+                        const marker = new google.maps.Marker({
+                            position: { lat: userLatLng.lat, lng: userLatLng.lng },
+                            map: map,
+                            title: "Hello",
+                            draggable:true
+                        });
+                       
+                        map.addListener('click', function (event) {
+                        const clickedLatLng = event.latLng;
+                        console.log('Clicked at:', clickedLatLng.lat(), clickedLatLng.lng());
+                        new google.maps.Marker({
+                            position: clickedLatLng,
+                            map: map,
+                            title: "hello again 2",
+                            draggable:true
+
+                        }).addListener('dragend',function(event){
+                            console.log("the new values :"+event.latLng)
+                        })
+                        const geocoder=new google.maps.Geocoder()
+                        geocoder.geocode({"location":clickedLatLng},function(results,status){
+                            if (status==="OK"){
+                                if (results[0]){
+                                    console.log('adresse is : '+results[0].formatted_address)
+                                }
+                                else {
+                                    console.log("no results found")
+                                }
+                            }
+                            else {
+                                console.log('Geocoder failed due to:', status);
+                            }
+
+                        })
+                    });
+                    })
+                }
+
+            }
+        </script>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenStreetMap Click Event Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <div id="map" style="width: 800px; height: 600px;"></div>
+    <div id="address-details"></div> <!-- This is where the address details will be displayed -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        map.on('click', function(e) {
+            var clickedLatLng = e.latlng;
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${clickedLatLng.lat}&lon=${clickedLatLng.lng}`)
+                .then(response => response.json())
+                .then(data => {
+                    var addressDetails = data.address;
+                    var addressString = 
+                        `Street: ${addressDetails.road || 'N/A'}<br>` +
+                        `City: ${addressDetails.city || addressDetails.town || 'N/A'}<br>` +
+                        `State: ${addressDetails.state || 'N/A'}<br>` +
+                        `Country: ${addressDetails.country || 'N/A'}`;
+
+                    // Embed the address details in the HTML using plain JavaScript
+                    document.getElementById('address-details').innerHTML = addressString;
+                })
+                .catch(error => {
+                    console.error('Error fetching address details:', error);
+                });
+        });
+    </script>
+</body>
+</html>

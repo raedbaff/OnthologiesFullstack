@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Mintos - Responsive Bootstrap 4 Admin Dashboard Template
+Author: Hencework
+Contact: https://hencework.ticksy.com/
+
+License: You must have a valid license purchased only from templatemonster to legally use the template for your project.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Mintos - SHARED ON THEMELOCK.COM  I Signup</title>
+    <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Custom CSS -->
+    <link href="../dependencies/dist/css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader-it">
+        <div class="loader-pendulums"></div>
+    </div>
+    <!-- /Preloader -->
+    
+	<!-- HK Wrapper -->
+	<div class="hk-wrapper">
+
+        <!-- Main Content -->
+        <div class="hk-pg-wrapper hk-auth-wrapper">
+            <header class="d-flex justify-content-between align-items-center">
+                <a class="d-flex auth-brand" href="#">
+                    <img class="brand-img" src="../dependencies/dist/img/logo-dark.png" alt="brand" />
+                </a>
+                <div class="btn-group btn-group-sm">
+                    <a href="#" class="btn btn-outline-secondary">Help</a>
+                    <a href="#" class="btn btn-outline-secondary">About Us</a>
+                </div>
+            </header>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-5 pa-0">
+                        <div class="auth-cover-img overlay-wrap" style="background-image:url(../dependencies/dist/img/gaming2.jpg);">
+                            <div class="auth-cover-info py-xl-0 pt-100 pb-50">
+                                <div class="auth-cover-content w-xxl-75 w-sm-90 w-100">
+                                    <h1 class="display-3 text-white mb-20">Enjoy unlimited beautiful display content area</h1>
+                                    <p class="text-white">The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software.</p>
+                                    <div class="play-wrap">
+                                        <a class="play-btn" href="#"></a>
+                                        <span>How it works ?</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-overlay bg-trans-dark-50"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 pa-0">
+                        <div class="auth-form-wrap py-xl-0 py-50">
+                            <div class="auth-form w-xxl-55 w-xl-75 w-sm-90 w-100">
+                                <form id="registerForm" method="post" >
+                                    <h1 class="display-4 mb-10">Sign up for free</h1>
+                                    <p class="mb-30">Create your account and start your free trial today</p>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Username" type="username" id="username" name="username" required>
+                                    </div>
+                                        
+                                    
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Email" type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Password" type="password" name="password" id="password" required>
+                                        <p style="color:red;font-weight: bold;" id="PasswordFailure"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" id="confirmPassword" placeholder="Confirm Password" type="password" required>
+                                            
+                                            <!-- <div class="input-group-append">
+                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="eye-off"></i></span></span>
+                                            </div> -->
+                                            
+                                        </div>
+                                        <p style="color:red;font-weight: bold;" id="confirmPasswordFailure"></p>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-25">
+                                        <input class="custom-control-input" id="same-address" type="checkbox" checked>
+                                        <label class="custom-control-label font-14" for="same-address">I have read and agree to the <a href=""><u>term and conditions</u></a></label>
+                                    </div>
+                                    <button class="btn btn-primary btn-block" type="submit">Register</button>
+                                    <div style="margin-top: 20px;" class="alert alert-inv alert-inv-success hidden" role="alert" id="successMessage" ></div>
+                                    <div class="option-sep">or</div>
+                                    <div class="form-row">
+                                        <div class="col-sm-6 mb-20">
+                                            <button class="btn btn-indigo btn-block btn-wth-icon"> <span class="icon-label"><i class="fa fa-facebook"></i> </span><span class="btn-text">Login with facebook</span></button>
+                                        </div>
+                                        <div class="col-sm-6 mb-20">
+                                            <button class="btn btn-sky btn-block btn-wth-icon"> <span class="icon-label"><i class="fa fa-twitter"></i> </span><span class="btn-text">Login with Twitter</span></button>
+                                        </div>
+                                    </div>
+                                    <p class="text-center">Already have an account? <a href="/login">Sign In</a></p>
+                                </form>
+                                
+                                    
+                                </div>
+                                
+                                <p style="color:red;font-weight: bold; margin-left: 150px;" id="FailureMessage"></p>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded',function(){
+                                        document.getElementById("registerForm").addEventListener("submit",function(e){
+                                            e.preventDefault()
+                                            const password=document.getElementById("password").value;
+                                            const confirmPassword=document.getElementById("confirmPassword").value;
+                                            if (password!==confirmPassword){
+                                                document.getElementById("PasswordFailure").textContent="Passwords Do Not Match !!"
+                                                document.getElementById("confirmPasswordFailure").textContent="Passwords Do Not Match !!"
+                                                setTimeout(() => {
+                                                    document.getElementById("PasswordFailure").textContent=""
+                                                    document.getElementById("confirmPasswordFailure").textContent=""
+                                                    
+                                                }, 2000);
+                                                return;
+
+                                            }
+                                            const formData=new FormData(e.target)
+                                            fetch("/register2",{
+                                                method:"POST",
+                                                body:formData
+                                            }).then((response)=>{
+                                                if (!response.ok){
+                                                    throw new Error("something is wrong")
+                                                }
+                                                return response.json()
+                                            }).then((data)=>{
+                                                if (data.message==="Successfully registered, Check mail for confirmation !!"){
+                                                    document.getElementById("successMessage").textContent=data.message
+                                                    document.getElementById("successMessage").classList.remove("hidden");
+                                                    setTimeout(() => {
+                                                        document.getElementById("successMessage").textContent=""
+                                                        document.getElementById("successMessage").classList.add("hidden");
+
+                                                        
+                                                    }, 2000);
+                                                } else {
+                                                    document.getElementById("FailureMessage").textContent=data.message
+                                                    setTimeout(() => {
+                                                        document.getElementById("FailureMessage").textContent=""
+                                                        
+                                                    }, 2000);
+
+                                                }
+                                            }).catch((error)=>{
+                                                document.getElementById("FailureMessage").textContent=error.message
+                                                    setTimeout(() => {
+                                                        document.getElementById("FailureMessage").textContent=""
+                                                        
+                                                    }, 2000);
+
+                                            })
+                                        })
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Main Content -->
+
+    </div>
+    <!-- /HK Wrapper -->
+
+    <!-- jQuery -->
+    <script src="../dependencies/vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../dependencies/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../dependencies/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Slimscroll JavaScript -->
+    <script src="../dependencies/dist/js/jquery.slimscroll.js"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="../dependencies/dist/js/dropdown-bootstrap-extended.js"></script>
+
+    <!-- FeatherIcons JavaScript -->
+    <script src="../dependencies/dist/js/feather.min.js"></script>
+
+    <!-- Init JavaScript -->
+    <script src="../dependencies/dist/js/init.js"></script>
+
+</body>
+
+</html>

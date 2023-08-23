@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Mintos - Responsive Bootstrap 4 Admin Dashboard Template
+Author: Hencework
+Contact: https://hencework.ticksy.com/
+
+License: You must have a valid license purchased only from templatemonster to legally use the template for your project.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Salle List</title>
+    <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    
+
+</head>
+
+<body>
+    
+   
+	<!-- HK Wrapper -->
+	
+
+        
+
+        <!-- Main Content -->
+        <% layout('layout') %>
+            <!-- Breadcrumb -->
+            <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Salles List</li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
+
+            <!-- Container -->
+            <div class="container">
+
+                <!-- Title -->
+                <div class="hk-pg-header">
+                    <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon"><i data-feather="database"></i></span></span>Data Tables</h4>
+                </div>
+                <!-- /Title -->
+
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <section class="hk-sec-wrapper">
+                            <h5 class="hk-sec-title" style="margin-bottom: 20px;">Salles List</h5>
+                            
+                            <a href="/sallee/add" class="btn btn-danger">Add new Salle</a>
+                            <button type="button" id="openAddSalleFormBtn" class="btn btn-primary">Add New Salle</button>
+                            <a href="/home" class="btn btn-info">Back home</a>
+                            
+                            <div id="addSalleFormContainer" style="display: none; margin-top: 20px; margin-bottom: 20px;">
+                                <form id="addSalleForm" method="post" >
+                                        
+
+                                    <div class="form-group">
+                                        <label for="libelle_salle">Libelle</label>
+                                        <div class="input-group">
+                                            
+                                            <input class="form-control" id="libelle_salle" name="libelle_salle" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="numero_salle">Numero</label>
+                                        <input class="form-control" id="numero_salle" name="numero_salle"  type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="etat">Etat</label>
+                                        <input class="form-control" id="etat" name="etat"  type="text">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="observation">Observation</label>
+                                        <input class="form-control" id="observation" name="observation" type="text">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="type">Type</label>
+                                        <input class="form-control" id="type" name="type" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="etablissement">Etablissment</label>
+                                        <input class="form-control" id="etablissement" name="etablissement" type="text">
+                                    </div>
+                                    
+                                    <input hidden name="createdBy" id="createdBy">
+
+                                    
+
+                                    
+                                    
+                                    
+                                    
+
+                                    
+                                    <hr>
+                                    <button class="btn btn-primary" type="submit">Add Salle</button>
+                                    
+                                    <p style="color: green; font-weight: bold;" id="message"></p>
+                                </form>
+                                <button class="btn btn-danger" style="margin-top: 10px;" id="cancelAddSalleBtn">Cancel</button>
+                            </div>
+                            <script>
+                                function fetchSalles(){
+                                const user = localStorage.getItem("user");
+                              console.log("this user is " + user);
+                              fetch(`/salle/user2/${user}`)
+                                .then((response) => response.json())
+                                .then((data) => {
+                                  const userListElement = document.getElementById("salleTable");
+                                  while (userListElement.firstChild) {
+                              userListElement.removeChild(userListElement.firstChild);
+                            }
+                        
+                                  data.mySalles.forEach((sallee) => {
+                                    const row = document.createElement("tr");
+                                    const libelleCell=document.createElement("td");
+                                    const numeroCell = document.createElement("td");
+                                    const EtatCell = document.createElement("td");
+                                    const observationCell = document.createElement("td");
+                                    const typeCell = document.createElement("td");
+                                    const EtablissmentCell = document.createElement("td");
+                                    const ButtonCell = document.createElement("td");
+                                    
+                                    libelleCell.textContent=sallee.libelle_salle.value;
+                                    numeroCell.textContent = sallee.numero_salle.value;
+                                    EtatCell.textContent = sallee.etat.value;
+                                    observationCell.textContent=sallee.observation.value;
+                                    typeCell.textContent=sallee.type.value;
+                                    EtablissmentCell.textContent=sallee.etablissement.value
+                                    const deleteLink = document.createElement("a");
+                                    deleteLink.href = `/students/${sallee.id_salle.value}`;
+                                    deleteLink.style.color = "red";
+                                    deleteLink.textContent = "Students";
+                                    
+                        
+                                    ButtonCell.appendChild(deleteLink);
+                                    row.appendChild(libelleCell)
+                                    row.appendChild(numeroCell);
+                                    row.appendChild(EtatCell);
+                                    row.appendChild(observationCell);
+                                    row.appendChild(typeCell);
+                                    row.appendChild(EtablissmentCell);
+                                    row.appendChild(ButtonCell);
+                                    row.id=`row_${sallee.id_salle.value}`
+                                    userListElement.appendChild(row);
+                                    
+
+                    
+                                    
+                                  });
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                });
+                               
+                        
+                            }
+                                document.addEventListener("DOMContentLoaded",function(){
+                                    // const SallesTable=document.getElementById("salleTable")
+                                    // function addSalleToTable(data){
+                                    //     const newRow=document.createElement('tr')
+                                    //     newRow.innerHTML=`
+                                    //     <td>${data.libelle_salle}</td>
+                                    //     <td>${data.numero_salle}</td>
+                                    //     <td>${data.etat}</td>
+                                    //     <td>${data.observation}</td>
+                                    //     <td>${data.type}</td>
+                                    //     <td>${data.etablissement}</td>
+                                    //     <td style="font-weight: bold;"><a href="/students/${data.id} %>">student list</a></td>
+                                    //     `;
+                                    //     newRow.id=`row_${data.id}`
+                                    //     SallesTable.appendChild(newRow)
+                                    // }
+                                    fetchSalles()
+                                    document.getElementById("openAddSalleFormBtn").addEventListener("click",function(){
+                                        document.getElementById("addSalleFormContainer").style.display="block"
+                                    })
+                                    document.getElementById("cancelAddSalleBtn").addEventListener("click",function(){
+                                        document.getElementById("addSalleFormContainer").style.display="none";
+                                    })
+                                    document.getElementById("addSalleForm").addEventListener("submit",function(event){
+                                        
+                                        event.preventDefault();
+                                        const user=localStorage.getItem("user")
+                                        document.getElementById("createdBy").value=user;
+                                        const formData = new FormData(event.target);
+                                        fetch("/saveSalle2",{
+                                            method:"POST",
+                                            body:formData
+                                        }).then((response)=>{
+                                            if(!response.ok){
+                                                throw new Error("something went wrong")
+                                            }
+                                            return response.json()
+                                        }).then((data)=>{
+                                            if (data.message==="added Salle successfully"){
+                                                document.getElementById("message").textContent=data.message
+                                                document.getElementById("addSalleForm").reset();
+                                                fetchSalles()
+                                                // addSalleToTable(data.SalleCreated)
+                                                setTimeout(() => {
+                                                    document.getElementById("message").textContent=""
+                                                    
+                                                }, 2000);
+
+                                            }
+                                            else {
+                                                document.getElementById("message").textContent=data.message
+                                                setTimeout(() => {
+                                                    document.getElementById("message").textContent=""
+                                                    
+                                                }, 2000);
+                                            }
+                                        }).catch((error)=>{
+                                            console.error("Error:", error);
+                                            document.getElementById("message").textContent=error.message
+                                            setTimeout(() => {
+                                            document.getElementById("message").textContent = ""; 
+                                            
+                                        }, 2000);
+                                        })
+                                    })
+                                })
+                            </script>
+                            <div class="col-sm" style="margin-top: 20px;">
+                                <div class="form-group">
+                                  <label for="searchInput">Search:</label>
+                                  <input type="text" id="searchInput" class="form-control" placeholder="Enter libelle">
+                                </div>
+                              </div>
+                            <div class="row" style="margin-top: 20px;">
+                                
+                                <div class="col-sm">
+                                    <div class="table-wrap">
+                                        <table id="datable_1" class="table table-hover w-100 display pb-30">
+                                            <thead>
+                                                <tr>
+                                                    <th>Libelle</th>
+                                                    <th>Numero</th>
+                                                    <th>Etat</th>
+                                                    <th>Observation</th>
+                                                    <th>type</th>
+                                                    <th>Etablissment</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="salleTable">
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded',function(){
+                                        const searchInput=document.getElementById("searchInput")
+                                        const tableRow=document.querySelectorAll("#datable_1 tbody tr")
+                                        searchInput.addEventListener("input",function(){
+                                            const libelle=searchInput.value.toLowerCase();
+                                            tableRow.forEach(function(row){
+                                                const libelle_salle=row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+                                                if (libelle_salle.includes(libelle)){
+                                                    row.style.display="table-row"
+                                                } else {
+                                                    row.style.display="none"
+                                                }
+
+                                            })
+                                        })
+
+                                    })
+                                 </script>
+                            </div>
+                        </section>
+                        
+                        
+                    </div>
+                </div>
+                <!-- /Row -->
+
+            </div>
+            <!-- /Container -->
+
+            
+
+       
+        <!-- /Main Content -->
+
+    
+    <!-- /HK Wrapper -->
+
+    
+
+</body>
+
+</html>

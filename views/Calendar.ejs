@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Mintos - Responsive Bootstrap 4 Admin Dashboard Template
+Author: Hencework
+Contact: https://hencework.ticksy.com/
+
+License: You must have a valid license purchased only from templatemonster to legally use the template for your project.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Cours</title>
+    <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+</head>
+
+<body>
+    <% layout('layout') %>
+        <!-- Main Content -->
+
+
+
+        <!-- Container -->
+
+        <!-- Container -->
+        <div class="container-fluid">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-xl-12 pa-0">
+                    <div class="calendarapp-wrap">
+                        <div class="calendarapp-sidebar">
+                            <div class="nicescroll-bar">
+                                <a id="close_calendarapp_sidebar" href="javascript:void(0)"
+                                    class="close-calendarapp-sidebar">
+                                    <span class="feather-icon"><i data-feather="chevron-left"></i></span>
+                                </a>
+                                <div class="add-event-wrap">
+                                    <div class="calendar-event alert alert-success alert-dismissible fade show"
+                                        role="alert">
+                                        <p>NYC Conference</p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="calendar-event alert alert-primary alert-dismissible fade show"
+                                        role="alert">
+                                        <p>Family Lunch</p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="calendar-event alert alert-danger alert-dismissible fade show"
+                                        role="alert">
+                                        <p>UX Meetup</p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="remove_event" checked>
+                                    <label class="custom-control-label" for="remove_event">Remove after drop</label>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-block mt-50 mb-20" data-toggle="modal"
+                                    data-target="#exampleModalEmail">
+                                    Add event
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="calendar-wrap">
+                            <script>
+                                document.addEventListener('DOMContentLoaded', async  function () {
+                                    const fetchData = async () => {
+                                        try {
+                                            const response = await fetch("http://192.168.1.199:1439/seance/getAllDailyGeneralSeanceByClasse?id_classe=eda40a50-e97c-11ec-851e-c914b2eefdf6");
+                                            const data = await response.json();
+
+                                            const events = [];
+                                            const joursDeSemaine = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+                                            const colors=["red","blue","yellow","purple","green","orange"]
+
+                                            joursDeSemaine.forEach((day, index) => {
+                                                if (data[day]) {
+                                                    data[day].forEach((seance) => {
+                                                        if (seance.start_date && seance.start_date.value && seance.nom_matiere && seance.nom_matiere.value) {
+                                                            const dayOfMonth = (index + 7).toString().padStart(2, '0');
+                                                            const startDateTime = `2023-${data.startdateglobal}-${dayOfMonth}T${seance.start_date.value}:00`;
+                                                            const endDateTime = `2023-${data.startdateglobal}-${dayOfMonth}T${seance.end_date.value}:00`;
+                                                            events.push({
+                                                                title: seance.nom_matiere.value,
+                                                                start: startDateTime,
+                                                                end: endDateTime,
+                                                                color:colors[index],
+                                                                textColor:"black",
+                                                                
+                                                            });
+                                                            
+                                                        }
+                                                    });
+                                                }
+                                            });
+
+                                            return events;
+                                        } catch (error) {
+                                            console.error(error);
+                                            return [];
+                                        }
+                                    };
+                                    
+                                   
+                                    $('#calendar').fullCalendar('removeEvents');
+                                    
+                                    $('#calendar').fullCalendar('addEventSource', {
+                                        local:"fr",
+                                        events: await fetchData(),
+                                        
+                                        
+                                        
+                                    });
+                                    
+                                    
+                                    
+                                   
+
+                                    // Add more events here...
+
+
+
+
+                                });
+                            </script>
+
+
+                            <div id="calendar"></div>
+
+                        </div>
+                        <!-- Compose email -->
+                        <div class="modal fade" id="exampleModalEmail" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalEmail" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-grey-dark-5">
+                                        <h6 class="modal-title text-white" id="exampleModalPopoversLabel">Add new event
+                                        </h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="inputEvent">Event name</label>
+                                                <input type="text" placeholder="Event" id="inputEvent"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDate">Date</label>
+                                                <input type="text" name="daterange" id="inputDate" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputTime">Time</label>
+                                                <input type="text" id="inputTime" class="form-control input-timepicker">
+                                            </div>
+                                            <div class="form-group custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="all_day">
+                                                <label class="custom-control-label" for="all_day">All day event</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputTime">Set Priority</label>
+                                                <select class="form-control custom-select">
+                                                    <option selected>Important</option>
+                                                    <option>Normal</option>
+                                                    <option>Important</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <button id="add_event" class="btn btn-primary btn-block mr-10"
+                                                    type="submit">Add</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Compose email -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Row -->
+
+        </div>
+        <!-- /Container -->
+
+        <!-- /Container -->
+
+
+
+
+        <!-- /Main Content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

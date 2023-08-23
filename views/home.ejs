@@ -1,0 +1,100 @@
+<!-- views/home.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Home</title>
+    
+    
+    
+</head>
+<body>
+  <% layout('layout') %>
+    <script>
+      function logout(){
+        localStorage.clear()
+        window.location.href = '/login';
+        
+      }
+      document.addEventListener('DOMContentLoaded',function(){
+        const token=localStorage.getItem("token")
+        
+
+        
+        
+          localStorage.setItem("token", <%- JSON.stringify(req.session.result.AccessToken) %>);
+        localStorage.setItem("user",<%- JSON.stringify(req.session.result.username) %>)
+        localStorage.setItem("id",<%- JSON.stringify(req.session.result.userId) %>)
+        localStorage.setItem("photo",<%- JSON.stringify(req.session.result.photo) %>)
+        function printPaget(){
+          window.print()
+        }
+        const user=localStorage.getItem("user")
+        document.getElementById("welcome").textContent=`Welcome Dear ${user} !`
+        function createAnchor(href,text){
+          const anchor=document.createElement("a");
+          anchor.href=href,
+          anchor.textContent=text,
+          anchor.style="color: black;margin-left: 20px;padding: 8px 16px; border: 2px solid #4CAF50;border-radius: 4px;text-decoration: none;background-color: #f2f2f2;transition: background-color 0.3s ease;"
+          document.getElementById("anchors").appendChild(anchor)
+
+        }
+            createAnchor(`/sparql/query/${user}`, "View pc list");
+            createAnchor(`/employee/all/${user}`, "View employee List");
+            createAnchor("/salle/list", "View Salle List");
+            createAnchor(`/getAllStudents/${user}`, "View All Students List");
+            createAnchor("/studentList2", "View All Students List 2");
+            createAnchor("/myCalendar","Courses Calendar")
+            createAnchor("/testCalendar","View Calendar")
+
+
+        
+        
+      })
+        
+      </script>
+      
+      <div style="margin-top: 50px;" id="contain" class="container">
+        <div style="border: solid;"> 
+          <div style="display: flex;flex-direction: row;justify-content: center;">
+          <h1 style="color: tomato; font-weight: bold; font-family: cursive;font-size: 70px;letter-spacing: 1px; " id="welcome" >
+          
+          </h1>
+          
+  
+          </div>
+          
+          <div style="display: flex; justify-content: center; margin-top: 20px; font-size: 50px; color: goldenrod;">
+            <p>PC management</p>
+        </div>
+          
+        </div>
+
+      </div>
+      <div style="margin-top: 20px; display: flex; justify-content: space-evenly;" id="anchors">
+        
+        
+      </div>
+      
+    
+      
+      
+      
+      <!-- <a style="position: fixed;
+               bottom: 20px;
+               right: 20px;
+               z-index: 9999;" href="/generate-pdf" type="button">Generate PDF</a>
+      <button style="position: fixed;bottom: 20px;right: 160px;z-index: 9999;"  onclick="printPaget()" type="button">Print Page</button> -->
+              
+
+
+      
+    
+
+
+    
+
+
+</body>
+</html>

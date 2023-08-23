@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Sails App</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <%/* If you want to discourage search engines from indexing this site, uncomment the following line: */%>
+    <%/* <meta name="robots" content="noindex"> */%>
+
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/dependencies/dist/css/animate.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/dripicons.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/glyphicons.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/lightgallery.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/linea-icon.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/simple-line-icons.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/style.css">
+    <link rel="stylesheet" href="/dependencies/dist/css/themify-icons.css">
+    <link rel="stylesheet" href="/dependencies/vendors/bootstrap-table/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/cropperjs/dist/cropper.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/datatables.net-dt/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/datatables.net-editor-dt/css/editor.bootstrap.css">
+    <link rel="stylesheet" href="/dependencies/vendors/datatables.net-editor-dt/css/editor.bootstrap.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/datatables.net-responsive-dt/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/datatables.net-select-dt/css/select.dataTables.css">
+    <link rel="stylesheet" href="/dependencies/vendors/datatables.net-select-dt/css/select.dataTables.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/dependencies/vendors/dropify/dist/css/demo.css">
+    <link rel="stylesheet" href="/dependencies/vendors/dropify/dist/css/dropify.css">
+    <link rel="stylesheet" href="/dependencies/vendors/dropify/dist/css/dropify.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/dropzone/dist/basic.css">
+    <link rel="stylesheet" href="/dependencies/vendors/dropzone/dist/dropzone.css">
+    <link rel="stylesheet" href="/dependencies/vendors/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/ion.rangeSlider.skinModern.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/ion.rangeSlider.skinNice.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/ion.rangeSlider.skinSimple.css">
+    <link rel="stylesheet" href="/dependencies/vendors/ion-rangeslider/css/normalize.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jasny-bootstrap/dist/css/jasny-bootstrap.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-steps/demo/css/jquery.steps.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toast-plugin/dist/jquery.toast.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/themes/toggles-all.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/themes/toggles-dark.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/themes/toggles-iphone.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/themes/toggles-light.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/themes/toggles-modern.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/themes/toggles-soft.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/toggles-full.css">
+    <link rel="stylesheet" href="/dependencies/vendors/jquery-toggles/css/toggles.css">
+    <link rel="stylesheet" href="/dependencies/vendors/lightgallery/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/morris.js/morris.css">
+    <link rel="stylesheet" href="/dependencies/vendors/nestable2/dist/jquery.nestable.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/owl.carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/owl.carousel/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/pickr-widget/dist/pickr.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/switchery/dist/switchery.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tablesaw/dist/tablesaw.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/plugins/codesample/css/prism.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/plugins/visualblocks/css/visualblocks.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/skins/lightgray/content.inline.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/skins/lightgray/content.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/skins/lightgray/content.mobile.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/skins/lightgray/skin.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/tinymce/skins/lightgray/skin.mobile.min.css">
+    <link rel="stylesheet" href="/dependencies/vendors/vectormap/jquery-jvectormap-2.0.3.css">
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+    
+
+
+    
+    <%- body %>
+
+
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like React, Vue.js, Angular, Ember, and Backbone
+        require that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `/assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different view engine (handlebars, dust, pug/jade, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    <!--TEMPLATES END-->
+
+
+    <!--
+        Server-side View Locals
+        ========================
+
+        Sometimes, it's convenient to get access to your server-side view locals from
+        client-side JavaScript.  This can improve page load times, remove the need for
+        extra AJAX requests, and make your client-side code easier to understand and
+        to maintain.  Sails provides a simple mechanism for accessing dynamic view
+        locals: the "exposeLocalsToBrowser()" view partial.
+
+        For more information on using this built-in feature, see:
+        https://sailsjs.com/docs/concepts/views/locals#?escaping-untrusted-data-using-exposelocalstobrowser
+
+    -->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `/assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <!--SCRIPTS-->
+    <script src="/dependencies/sails.io.js"></script>
+    <script src="/dependencies/dist/js/areacharts-data.js"></script>
+    <script src="/dependencies/dist/js/barcharts-data.js"></script>
+    <script src="/dependencies/dist/js/cropperjs-data.js"></script>
+    <script src="/dependencies/dist/js/dashboard-data.js"></script>
+    <script src="/dependencies/dist/js/dashboard2-data.js"></script>
+    <script src="/dependencies/dist/js/dashboard3-data.js"></script>
+    <script src="/dependencies/dist/js/dashboard4-data.js"></script>
+    <script src="/dependencies/dist/js/dashboard5-data.js"></script>
+    <script src="/dependencies/dist/js/dataTables-data.js"></script>
+    <script src="/dependencies/dist/js/daterangepicker-data.js"></script>
+    <script src="/dependencies/dist/js/db.js"></script>
+    <script src="/dependencies/dist/js/dropdown-bootstrap-extended.js"></script>
+    <script src="/dependencies/dist/js/easypiechart-data.js"></script>
+    <script src="/dependencies/dist/js/editable-table-data.js"></script>
+    <script src="/dependencies/dist/js/feather.min.js"></script>
+    <script src="/dependencies/dist/js/fm-data.js"></script>
+    <script src="/dependencies/dist/js/form-file-upload-data.js"></script>
+    <script src="/dependencies/dist/js/form-picker-data.js"></script>
+    <script src="/dependencies/dist/js/form-wizard-data.js"></script>
+    <script src="/dependencies/dist/js/froogaloop2.min.js"></script>
+    <script src="/dependencies/dist/js/fullcalendar-data.js"></script>
+    <script src="/dependencies/dist/js/gallery-data.js"></script>
+    <script src="/dependencies/dist/js/gmap-data.js"></script>
+    <script src="/dependencies/dist/js/init.js"></script>
+    <script src="/dependencies/dist/js/inputspinner-data.js"></script>
+    <script src="/dependencies/dist/js/jquery.slimscroll.js"></script>
+    <script src="/dependencies/dist/js/landing-data.js"></script>
+    <script src="/dependencies/dist/js/lightgallery-all.js"></script>
+    <script src="/dependencies/dist/js/linecharts-data.js"></script>
+    <script src="/dependencies/dist/js/login-data.js"></script>
+    <script src="/dependencies/dist/js/modal-data.js"></script>
+    <script src="/dependencies/dist/js/modernizr.custom.js"></script>
+    <script src="/dependencies/dist/js/morris-data.js"></script>
+    <script src="/dependencies/dist/js/nestable-data.js"></script>
+    <script src="/dependencies/dist/js/owl-data.js"></script>
+    <script src="/dependencies/dist/js/peity-data.js"></script>
+    <script src="/dependencies/dist/js/pickr-data.js"></script>
+    <script src="/dependencies/dist/js/piecharts-data.js"></script>
+    <script src="/dependencies/dist/js/rangeslider-data.js"></script>
+    <script src="/dependencies/dist/js/realtimecharts-data.js"></script>
+    <script src="/dependencies/dist/js/select2-data.js"></script>
+    <script src="/dependencies/dist/js/sparkline-data.js"></script>
+    <script src="/dependencies/dist/js/sweetalert-data.js"></script>
+    <script src="/dependencies/dist/js/tablesaw-data.js"></script>
+    <script src="/dependencies/dist/js/tinymce-data.js"></script>
+    <script src="/dependencies/dist/js/toast-data.js"></script>
+    <script src="/dependencies/dist/js/toggle-data.js"></script>
+    <script src="/dependencies/dist/js/tooltip-data.js"></script>
+    <script src="/dependencies/dist/js/twitterFetcher.js"></script>
+    <script src="/dependencies/dist/js/validation-data.js"></script>
+    <script src="/dependencies/dist/js/vectormap-data.js"></script>
+    <script src="/dependencies/dist/js/widgets-data.js"></script>
+    <script src="/dependencies/vendors/bootstrap-input-spinner/src/bootstrap-input-spinner.js"></script>
+    <script src="/dependencies/vendors/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="/dependencies/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/dependencies/vendors/counterup/jquery.counterup.min.js"></script>
+    <script src="/dependencies/vendors/cropperjs/dist/cropper.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-dt/js/dataTables.dataTables.js"></script>
+    <script src="/dependencies/vendors/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-responsive/js/dataTables.responsive.js"></script>
+    <script src="/dependencies/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-select-dt/js/select.dataTables.js"></script>
+    <script src="/dependencies/vendors/datatables.net-select-dt/js/select.dataTables.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net-select/js/dataTables.select.js"></script>
+    <script src="/dependencies/vendors/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="/dependencies/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/dependencies/vendors/daterangepicker/daterangepicker.js"></script>
+    <script src="/dependencies/vendors/dropify/dist/js/dropify.js"></script>
+    <script src="/dependencies/vendors/dropify/dist/js/dropify.min.js"></script>
+    <script src="/dependencies/vendors/dropzone/dist/dropzone.js"></script>
+    <script src="/dependencies/vendors/easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    <script src="/dependencies/vendors/echarts/dist/echarts-en.min.js"></script>
+    <script src="/dependencies/vendors/editable-table/mindmup-editabletable.js"></script>
+    <script src="/dependencies/vendors/editable-table/numeric-input-example.js"></script>
+    <script src="/dependencies/vendors/flot/excanvas.min.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.colorhelpers.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.categories.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.crosshair.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.errorbars.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.fillbetween.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.image.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.navigate.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.pie.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.resize.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.selection.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.stack.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.symbol.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.threshold.js"></script>
+    <script src="/dependencies/vendors/flot/jquery.flot.time.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/gcal.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/gcal.min.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale-all.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/af.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar-dz.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar-kw.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar-ly.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar-ma.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar-sa.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar-tn.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ar.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/bg.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/bs.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ca.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/cs.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/da.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/de-at.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/de-ch.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/de.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/el.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/en-au.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/en-ca.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/en-gb.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/en-ie.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/en-nz.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/es-do.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/es-us.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/es.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/et.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/eu.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/fa.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/fi.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/fr-ca.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/fr-ch.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/fr.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/gl.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/he.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/hi.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/hr.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/hu.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/id.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/is.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/it.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ja.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ka.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/kk.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ko.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/lb.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/lt.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/lv.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/mk.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ms-my.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ms.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/nb.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/nl-be.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/nl.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/nn.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/pl.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/pt-br.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/pt.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ro.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/ru.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/sk.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/sl.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/sq.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/sr-cyrl.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/sr.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/sv.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/th.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/tr.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/uk.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/vi.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/zh-cn.js"></script>
+    <script src="/dependencies/vendors/fullcalendar/dist/locale/zh-tw.js"></script>
+    <script src="/dependencies/vendors/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+    <script src="/dependencies/vendors/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+    <script src="/dependencies/vendors/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="/dependencies/vendors/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+    <script src="/dependencies/vendors/jquery-toggles/toggles.min.js"></script>
+    <script src="/dependencies/vendors/jquery-ui.min.js"></script>
+    <script src="/dependencies/vendors/jquery.counterup/jquery.counterup.min.js"></script>
+    <script src="/dependencies/vendors/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/base.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-bar.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-box.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-bullet.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-discrete.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-line.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-pie.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/chart-tristate.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/defaults.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/footer.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/header.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/interact.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/rangemap.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/simpledraw.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/utils.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/vcanvas-base.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/vcanvas-canvas.js"></script>
+    <script src="/dependencies/vendors/jquery.sparkline/src/vcanvas-vml.js"></script>
+    <script src="/dependencies/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/dependencies/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/dependencies/vendors/lightgallery/dist/js/lightgallery-all.min.js"></script>
+    <script src="/dependencies/vendors/moment/ender.js"></script>
+    <script src="/dependencies/vendors/moment/locale/af.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar-dz.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar-kw.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar-ly.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar-ma.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar-sa.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar-tn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ar.js"></script>
+    <script src="/dependencies/vendors/moment/locale/az.js"></script>
+    <script src="/dependencies/vendors/moment/locale/be.js"></script>
+    <script src="/dependencies/vendors/moment/locale/bg.js"></script>
+    <script src="/dependencies/vendors/moment/locale/bm.js"></script>
+    <script src="/dependencies/vendors/moment/locale/bn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/bo.js"></script>
+    <script src="/dependencies/vendors/moment/locale/br.js"></script>
+    <script src="/dependencies/vendors/moment/locale/bs.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ca.js"></script>
+    <script src="/dependencies/vendors/moment/locale/cs.js"></script>
+    <script src="/dependencies/vendors/moment/locale/cv.js"></script>
+    <script src="/dependencies/vendors/moment/locale/cy.js"></script>
+    <script src="/dependencies/vendors/moment/locale/da.js"></script>
+    <script src="/dependencies/vendors/moment/locale/de-at.js"></script>
+    <script src="/dependencies/vendors/moment/locale/de-ch.js"></script>
+    <script src="/dependencies/vendors/moment/locale/de.js"></script>
+    <script src="/dependencies/vendors/moment/locale/dv.js"></script>
+    <script src="/dependencies/vendors/moment/locale/el.js"></script>
+    <script src="/dependencies/vendors/moment/locale/en-au.js"></script>
+    <script src="/dependencies/vendors/moment/locale/en-ca.js"></script>
+    <script src="/dependencies/vendors/moment/locale/en-gb.js"></script>
+    <script src="/dependencies/vendors/moment/locale/en-ie.js"></script>
+    <script src="/dependencies/vendors/moment/locale/en-il.js"></script>
+    <script src="/dependencies/vendors/moment/locale/en-nz.js"></script>
+    <script src="/dependencies/vendors/moment/locale/eo.js"></script>
+    <script src="/dependencies/vendors/moment/locale/es-do.js"></script>
+    <script src="/dependencies/vendors/moment/locale/es-us.js"></script>
+    <script src="/dependencies/vendors/moment/locale/es.js"></script>
+    <script src="/dependencies/vendors/moment/locale/et.js"></script>
+    <script src="/dependencies/vendors/moment/locale/eu.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fa.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fi.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fo.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fr-ca.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fr-ch.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fr.js"></script>
+    <script src="/dependencies/vendors/moment/locale/fy.js"></script>
+    <script src="/dependencies/vendors/moment/locale/gd.js"></script>
+    <script src="/dependencies/vendors/moment/locale/gl.js"></script>
+    <script src="/dependencies/vendors/moment/locale/gom-latn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/gu.js"></script>
+    <script src="/dependencies/vendors/moment/locale/he.js"></script>
+    <script src="/dependencies/vendors/moment/locale/hi.js"></script>
+    <script src="/dependencies/vendors/moment/locale/hr.js"></script>
+    <script src="/dependencies/vendors/moment/locale/hu.js"></script>
+    <script src="/dependencies/vendors/moment/locale/hy-am.js"></script>
+    <script src="/dependencies/vendors/moment/locale/id.js"></script>
+    <script src="/dependencies/vendors/moment/locale/is.js"></script>
+    <script src="/dependencies/vendors/moment/locale/it.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ja.js"></script>
+    <script src="/dependencies/vendors/moment/locale/jv.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ka.js"></script>
+    <script src="/dependencies/vendors/moment/locale/kk.js"></script>
+    <script src="/dependencies/vendors/moment/locale/km.js"></script>
+    <script src="/dependencies/vendors/moment/locale/kn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ko.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ky.js"></script>
+    <script src="/dependencies/vendors/moment/locale/lb.js"></script>
+    <script src="/dependencies/vendors/moment/locale/lo.js"></script>
+    <script src="/dependencies/vendors/moment/locale/lt.js"></script>
+    <script src="/dependencies/vendors/moment/locale/lv.js"></script>
+    <script src="/dependencies/vendors/moment/locale/me.js"></script>
+    <script src="/dependencies/vendors/moment/locale/mi.js"></script>
+    <script src="/dependencies/vendors/moment/locale/mk.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ml.js"></script>
+    <script src="/dependencies/vendors/moment/locale/mn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/mr.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ms-my.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ms.js"></script>
+    <script src="/dependencies/vendors/moment/locale/mt.js"></script>
+    <script src="/dependencies/vendors/moment/locale/my.js"></script>
+    <script src="/dependencies/vendors/moment/locale/nb.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ne.js"></script>
+    <script src="/dependencies/vendors/moment/locale/nl-be.js"></script>
+    <script src="/dependencies/vendors/moment/locale/nl.js"></script>
+    <script src="/dependencies/vendors/moment/locale/nn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/pa-in.js"></script>
+    <script src="/dependencies/vendors/moment/locale/pl.js"></script>
+    <script src="/dependencies/vendors/moment/locale/pt-br.js"></script>
+    <script src="/dependencies/vendors/moment/locale/pt.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ro.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ru.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sd.js"></script>
+    <script src="/dependencies/vendors/moment/locale/se.js"></script>
+    <script src="/dependencies/vendors/moment/locale/si.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sk.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sl.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sq.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sr-cyrl.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sr.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ss.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sv.js"></script>
+    <script src="/dependencies/vendors/moment/locale/sw.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ta.js"></script>
+    <script src="/dependencies/vendors/moment/locale/te.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tet.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tg.js"></script>
+    <script src="/dependencies/vendors/moment/locale/th.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tl-ph.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tlh.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tr.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tzl.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tzm-latn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/tzm.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ug-cn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/uk.js"></script>
+    <script src="/dependencies/vendors/moment/locale/ur.js"></script>
+    <script src="/dependencies/vendors/moment/locale/uz-latn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/uz.js"></script>
+    <script src="/dependencies/vendors/moment/locale/vi.js"></script>
+    <script src="/dependencies/vendors/moment/locale/x-pseudo.js"></script>
+    <script src="/dependencies/vendors/moment/locale/yo.js"></script>
+    <script src="/dependencies/vendors/moment/locale/zh-cn.js"></script>
+    <script src="/dependencies/vendors/moment/locale/zh-hk.js"></script>
+    <script src="/dependencies/vendors/moment/locale/zh-tw.js"></script>
+    <script src="/dependencies/vendors/moment/min/locales.js"></script>
+    <script src="/dependencies/vendors/moment/min/locales.min.js"></script>
+    <script src="/dependencies/vendors/moment/min/moment-with-locales.js"></script>
+    <script src="/dependencies/vendors/moment/min/moment-with-locales.min.js"></script>
+    <script src="/dependencies/vendors/moment/min/moment.min.js"></script>
+    <script src="/dependencies/vendors/moment/moment.js"></script>
+    <script src="/dependencies/vendors/moment/package.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/check-overflow.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/date-from-array.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/from-anything.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/from-array.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/from-object.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/from-string-and-array.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/from-string-and-format.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/from-string.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/local.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/parsing-flags.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/utc.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/create/valid.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/abs.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/add-subtract.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/as.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/bubble.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/clone.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/constructor.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/create.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/duration.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/get.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/humanize.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/iso-string.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/prototype.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/duration/valid.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/format/format.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/base-config.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/calendar.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/constructor.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/en.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/formats.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/invalid.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/lists.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/locale.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/locales.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/ordinal.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/pre-post-format.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/prototype.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/relative.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/locale/set.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/add-subtract.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/calendar.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/clone.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/compare.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/constructor.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/creation-data.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/diff.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/format.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/from.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/get-set.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/locale.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/min-max.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/moment.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/now.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/prototype.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/start-end-of.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/to-type.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/to.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/moment/valid.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/parse/regex.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/parse/token.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/aliases.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/constants.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/day-of-month.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/day-of-week.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/day-of-year.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/hour.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/millisecond.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/minute.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/month.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/offset.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/priorities.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/quarter.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/second.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/timestamp.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/timezone.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/units.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/week-calendar-utils.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/week-year.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/week.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/units/year.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/abs-ceil.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/abs-floor.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/abs-round.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/compare-arrays.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/defaults.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/deprecate.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/extend.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/has-own-prop.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/hooks.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/index-of.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-array.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-date.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-function.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-number.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-object-empty.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-object.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/is-undefined.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/keys.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/map.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/mod.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/some.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/to-int.js"></script>
+    <script src="/dependencies/vendors/moment/src/lib/utils/zero-fill.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/af.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar-dz.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar-kw.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar-ly.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar-ma.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar-sa.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar-tn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ar.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/az.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/be.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/bg.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/bm.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/bn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/bo.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/br.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/bs.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ca.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/cs.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/cv.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/cy.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/da.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/de-at.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/de-ch.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/de.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/dv.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/el.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/en-au.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/en-ca.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/en-gb.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/en-ie.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/en-il.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/en-nz.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/eo.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/es-do.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/es-us.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/es.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/et.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/eu.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fa.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fi.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fo.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fr-ca.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fr-ch.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fr.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/fy.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/gd.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/gl.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/gom-latn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/gu.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/he.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/hi.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/hr.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/hu.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/hy-am.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/id.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/is.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/it.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ja.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/jv.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ka.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/kk.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/km.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/kn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ko.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ky.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/lb.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/lo.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/lt.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/lv.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/me.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/mi.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/mk.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ml.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/mn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/mr.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ms-my.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ms.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/mt.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/my.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/nb.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ne.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/nl-be.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/nl.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/nn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/pa-in.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/pl.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/pt-br.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/pt.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ro.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ru.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sd.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/se.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/si.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sk.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sl.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sq.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sr-cyrl.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sr.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ss.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sv.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/sw.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ta.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/te.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tet.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tg.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/th.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tl-ph.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tlh.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tr.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tzl.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tzm-latn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/tzm.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ug-cn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/uk.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/ur.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/uz-latn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/uz.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/vi.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/x-pseudo.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/yo.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/zh-cn.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/zh-hk.js"></script>
+    <script src="/dependencies/vendors/moment/src/locale/zh-tw.js"></script>
+    <script src="/dependencies/vendors/moment/src/moment.js"></script>
+    <script src="/dependencies/vendors/morris.js"></script>
+    <script src="/dependencies/vendors/morris.js/morris.min.js"></script>
+    <script src="/dependencies/vendors/nestable2/dist/jquery.nestable.min.js"></script>
+    <script src="/dependencies/vendors/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="/dependencies/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/dependencies/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="/dependencies/vendors/peity/jquery.peity.min.js"></script>
+    <script src="/dependencies/vendors/pickr-widget/dist/pickr.min.js"></script>
+    <script src="/dependencies/vendors/popper.js"></script>
+    <script src="/dependencies/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/dependencies/vendors/raphael/raphael.min.js"></script>
+    <script src="/dependencies/vendors/select2/dist/js/select2.full.min.js"></script>
+    <script src="/dependencies/vendors/select2/dist/js/select2.min.js"></script>
+    <script src="/dependencies/vendors/switchery/dist/switchery.min.js"></script>
+    <script src="/dependencies/vendors/tablesaw/dist/tablesaw.jquery.js"></script>
+    <script src="/dependencies/vendors/tinymce/jquery.tinymce.js"></script>
+    <script src="/dependencies/vendors/tinymce/jquery.tinymce.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/advlist/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/advlist/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/advlist/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/anchor/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/anchor/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/anchor/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autolink/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autolink/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autolink/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autoresize/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autoresize/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autoresize/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autosave/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autosave/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/autosave/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/bbcode/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/bbcode/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/bbcode/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/charmap/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/charmap/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/charmap/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/code/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/code/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/code/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/codesample/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/codesample/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/codesample/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/colorpicker/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/colorpicker/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/colorpicker/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/contextmenu/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/contextmenu/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/contextmenu/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/directionality/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/directionality/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/directionality/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/emoticons/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/emoticons/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/emoticons/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/fullpage/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/fullpage/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/fullpage/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/fullscreen/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/fullscreen/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/fullscreen/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/help/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/help/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/help/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/hr/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/hr/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/hr/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/image/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/image/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/image/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/imagetools/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/imagetools/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/imagetools/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/importcss/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/importcss/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/importcss/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/insertdatetime/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/insertdatetime/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/insertdatetime/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/legacyoutput/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/legacyoutput/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/legacyoutput/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/link/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/link/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/link/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/lists/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/lists/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/lists/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/media/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/media/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/media/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/nonbreaking/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/nonbreaking/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/nonbreaking/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/noneditable/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/noneditable/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/noneditable/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/pagebreak/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/pagebreak/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/pagebreak/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/paste/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/paste/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/paste/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/preview/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/preview/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/preview/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/print/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/print/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/print/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/save/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/save/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/save/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/searchreplace/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/searchreplace/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/searchreplace/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/spellchecker/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/spellchecker/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/spellchecker/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/tabfocus/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/tabfocus/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/tabfocus/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/table/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/table/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/table/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/template/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/template/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/template/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/textcolor/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/textcolor/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/textcolor/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/textpattern/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/textpattern/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/textpattern/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/toc/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/toc/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/toc/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/visualblocks/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/visualblocks/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/visualblocks/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/visualchars/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/visualchars/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/visualchars/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/wordcount/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/wordcount/plugin.js"></script>
+    <script src="/dependencies/vendors/tinymce/plugins/wordcount/plugin.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/inlite/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/inlite/theme.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/inlite/theme.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/mobile/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/mobile/theme.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/mobile/theme.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/modern/index.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/modern/theme.js"></script>
+    <script src="/dependencies/vendors/tinymce/themes/modern/theme.min.js"></script>
+    <script src="/dependencies/vendors/tinymce/tinymce.js"></script>
+    <script src="/dependencies/vendors/tinymce/tinymce.min.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-au-mill.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-de-merc.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-es-merc.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-in-mill.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-ru-mill.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-uk-mill-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-us-aea-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-us-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/jvectormap.custom.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ak-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-al-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ar-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-az-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ca-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-co-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ct-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-dc-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-de-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-fl-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ga-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-hi-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ia-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-id-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-il-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-in-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ks-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ky-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-la-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ma-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-md-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-me-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-mi-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-mn-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-mo-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ms-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-mt-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-nc-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-nd-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ne-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-nh-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-nj-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-nm-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-nv-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ny-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-oh-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ok-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-or-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-pa-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ri-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-sc-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-sd-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-tn-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-tx-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-ut-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-va-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-vt-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-wa-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-wi-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-wv-lcc-en.js"></script>
+    <script src="/dependencies/vendors/vectormap/us/jquery-jvectormap-data-us-wy-lcc-en.js"></script>
+    <script src="/dependencies/vendors/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="/js/sails.io.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

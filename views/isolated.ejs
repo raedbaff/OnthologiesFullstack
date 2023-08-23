@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Calendar Example</title>
+
+
+</head>
+
+<body>
+    <% layout('layout') %>
+        <div id="calendar"></div>
+        <script>
+            document.addEventListener('DOMContentLoaded', async function () {
+                
+                
+                
+                const fetchData = async () => {
+                    try {
+                        const response = await fetch("http://localhost:1337/courses/130f8655-e5c6-4456-833c-29196fba1ac5");
+                        const data = await response.json();
+
+                        const events = [];
+
+
+
+
+                        data.courses.forEach((seance) => {
+
+
+                            const startDateTime = `${seance.day.value}T${seance.startDate.value}:00`;
+                            const endDateTime = `${seance.day.value}T${seance.endDate.value}:00`;
+                            events.push({
+                                title: seance.CourseName.value,
+                                start: startDateTime,
+                                end: endDateTime,
+
+
+                            });
+
+
+                        });
+
+
+
+                        return events;
+                    } catch (error) {
+                        console.error(error);
+                        return [];
+                    }
+                };
+
+
+                $('#calendar').fullCalendar('removeEvents');
+
+                $('#calendar').fullCalendar('addEventSource', {
+                    locale: 'fr',
+                    events: await fetchData(),
+
+
+
+                });
+                const refreshCalendarEvents = async () => {
+                    const newEvents = await fetchData();
+
+                    $('#calendar').fullCalendar('removeEvents');
+                    $('#calendar').fullCalendar('addEventSource', {
+                        locale: 'fr',
+                        events: newEvents,
+                    });
+                };
+
+
+
+
+
+                // Add more events here...
+
+
+
+
+            });
+        </script>
+          
+</body>
+
+</html>
