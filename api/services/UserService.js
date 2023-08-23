@@ -48,7 +48,7 @@ module.exports = {
 
       // Define the email data
       const mailOptions = {
-        from: "raedbaffoun90@gmail.com",
+        from: "YOUR_EMAIL",
         to: email,
         subject: "Account confirmation",
         html: `Click the following link to confirm your account: <a href="${confirmationLink}">Confirm account</a>`,
