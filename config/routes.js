@@ -97,6 +97,7 @@ module.exports.routes = {
   'GET /courses/:classe':'CoursesController.GetCoursesByClasse',
   //upload image
   'POST /uploadImage/:user': 'UploadImageController.uploadImage',
+  'POST /uploadpdf':'UploadImageController.uploadPDF',
   'GET /images/:filename/:ext': 'UploadImageController.getImage',
 
   //badge

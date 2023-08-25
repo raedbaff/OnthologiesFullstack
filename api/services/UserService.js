@@ -8,7 +8,38 @@ const nodemailer = require("nodemailer");
 const uuidv4 = require("uuid").v4;
 
 module.exports = {
- 
+  // async sendMail(email,confirmationToken) {
+  //     console.log("sending mail now ...")
+  //       // Replace these with your actual Mailtrap credentials
+  //       const SMTP_HOST = "sandbox.smtp.mailtrap.io";
+  //       const SMTP_PORT = 587;
+  //       const SMTP_USERNAME = "f2bfa53293821e";
+  //       const SMTP_PASSWORD = "8f1f274808ed1b";
+
+  //       const transporter = nodemailer.createTransport({
+  //         host: SMTP_HOST,
+  //         port: SMTP_PORT,
+  //         auth: {
+  //           user: SMTP_USERNAME,
+  //           pass: SMTP_PASSWORD,
+  //         },
+  //       });
+  //       const confirmationLink = `http://localhost:1337/confirm/${confirmationToken}`;
+  //       const mailOptions = {
+  //         from: "raedbaffoun90@gmail.com",
+  //         to: email, //
+  //         subject: "Hello World",
+  //         html: `Click the following link to confirm your account: <a href="${confirmationLink}">Confirm account</a>`,
+  //       };
+
+  //       transporter.sendMail(mailOptions, (error, info) => {
+  //         if (error) {
+  //           console.log("Error sending email:", error);
+  //         } else {
+  //           console.log("Email sent:", info.response);
+  //         }
+  //       });
+  //     },
 
   async register(username, email, password) {
     const sparqlEndpoint = "http://localhost:3030/my_dataset/update";
@@ -41,8 +72,8 @@ module.exports = {
         port: 465, // Use the port provided by Elastic Email
         secure: true, // Set this to true if using port 465
         auth: {
-          user: "YOUR_EMAIL",
-          pass: "YOUR_PASSWORD",
+          user: "raedbaffoun90@gmail.com",
+          pass: "AEF27A90EB6C895A8AFDEA3F023239A57F9A",
         },
       });
 
@@ -60,7 +91,7 @@ module.exports = {
           console.log("Email sent:", info.response);
         }
       });
-     
+      //   await sendConfirmEmail(email, confirmationToken);
       return true;
     } catch (error) {
       throw error;
@@ -149,7 +180,24 @@ module.exports = {
   async getUserProfile(id) {
     try {
       const sparqlEndpoint = "http://localhost:3030/my_dataset/query";
-     
+      const sparqlQuery2=`
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX educa: <http://www.semanticweb.org/gueddes/ontologies/2015/e-Saad-Educa#>
+PREFIX ex: <http://example.org/>
+PREFIX image: <http://www.semanticweb.org/gueddes/ontologies/2015/e-Saad-Educa/image/>
+
+SELECT ?user ?username ?email ?password ?isConfirmed ?id ?image ?hasImage
+WHERE {
+    ?user ex:email ?email;
+          ex:id "${id}";
+          ex:id ?id;
+          ex:password ?password;
+          ex:username ?username;
+          ex:email ?email;
+          ex:isConfirmed ?isConfirmed.
+    ?image educa:BelongsTo ?id ;
+           educa:hasImage ?hasImage .
+}`;
 const sparqlQuery=`
 PREFIX ex: <http://example.org/>
 

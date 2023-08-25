@@ -12,6 +12,17 @@
         io.sails.url = 'http://localhost:1337'; // Change to your server URL
         io.sails.autoConnect = true; // Automatically connect
     </script>
+    <style >
+        .pdfCont{
+            display: flex;
+            align-items: center;
+            border: 1px solid;
+            height: 65px;
+            margin-top: 7px;
+            background-color: rgba(255, 255, 255, 0.667);
+            width: 200px;
+        }
+    </style>
 
 
 
@@ -138,7 +149,7 @@
                                         <div class="btn-file  btn btn-light">
                                             <div class="btn-icon-wrap">
                                                 <span class="feather-icon"><i data-feather="paperclip"></i></span>
-                                                <input type="file">
+                                                <input type="file" id="pdf" name="pdf">
                                             </div>
                                         </div>
                                     </div>
@@ -181,6 +192,7 @@
                     var messageList = document.getElementById("message-list");
                     messageList.innerHTML = ""
                     data.messages.forEach((message) => {
+                        console.log("message by message :" + JSON.stringify(message))
                         console.log("here is the photo : " + photo)
                         document.getElementById("usernameMenu").textContent = username
                         const imagename = photo.split(".")[0]
@@ -201,9 +213,45 @@
                         const msgBoxDiv = document.createElement("div");
                         msgBoxDiv.className = "msg-box";
                         const outsideDiv = document.createElement("div")
+                        const pdfContainer = document.createElement("div");
+                        pdfContainer.className="pdfCont"
+                        
 
                         const messageText = document.createElement("p");
-                        messageText.textContent = message.Content.value;
+            
+                        var pdfname = message.PDFFile.value.split(".")[0]
+                        const pdfExt = message.PDFFile.value.split(".")[1]
+                        var a = document.createElement("a")
+                        a.href = `http://localhost:1337/images/${pdfname}/${pdfExt}`
+                        a.textContent = `${message.PDFName.value}`;
+                        a.download = `http://localhost:1337/images/${pdfname}/${pdfExt}`;
+                        a.style.textDecoration = "none";
+                        a.style.color = "#007BFF";
+                        a.style.backgroundColor = "#F8F9FA";
+                        a.style.padding = "8px 12px";
+                        a.style.borderRadius = "4px";
+                        a.style.border = "1px solid #CCCCCC";
+                        a.style.fontWeight = "bold";
+                        a.style.marginLeft = "10px"
+                        var pdfIcon = document.createElement("img");
+                        pdfIcon.src = "../dependencies/icons/pdf.png"; 
+                        pdfIcon.alt = "PDF Icon";
+                        pdfIcon.style.width = "25px"; 
+                        pdfIcon.style.marginRight = "5px";
+                        pdfIcon.style.marginLeft = "5px";
+                        pdfContainer.appendChild(pdfIcon)
+                        pdfContainer.appendChild(a)
+
+
+
+
+                        if (message.PDFFile.value === "") {
+                            messageText.textContent = message.Content.value;
+                        } else {
+                            messageText.textContent = message.Content.value;
+                            messageText.appendChild(pdfContainer); // Append the <a> element to the paragraph
+                        }
+
 
                         const chatTimeSpan = document.createElement("span");
                         chatTimeSpan.className = "chat-time";
@@ -342,32 +390,47 @@
                 })
 
                 document.getElementById("sendMessageForm").addEventListener("submit", function (e) {
-                    const userid = localStorage.getItem("id")
-                    e.preventDefault()
-                    const formdata = new FormData(e.target)
+                    const userid = localStorage.getItem("id");
+                    e.preventDefault();
 
-                    console.log("the content about to be sent : " + formdata.get("Content"))
-                    fetch(`http://localhost:1337/sendMessage/${userid}/${clickedId}`, {
-                        method: "POST",
-                        body: formdata
-                    }).then((response) => {
-                        if (response.ok) {
-                            return response.json()
-                        }
-                    }).then((data) => {
+                    var contentValue = document.getElementById("Content").value;
+                    var formdata = new FormData();
+                    
 
-                        console.log("sent with success")
-                        document.getElementById("sendMessageForm").reset()
-                    })
+                    const pdfInput = document.getElementById("pdf");
+                    if (pdfInput.files[0]) {
+                        formdata.append("Content", contentValue);
+                        formdata.append("pdf", pdfInput.files[0]);
 
-                })
+                        console.log("the content about to be sent : " + contentValue);
+                        console.log("the pdf about to be sent : " + pdfInput.files[0].name);
+                    } else {
+                        formdata.append("Content", contentValue);
+                    }
+                    sendTheMessage(formdata)
+                     
+
+                    function sendTheMessage(data) {
+                        fetch(`http://localhost:1337/sendMessage/${userid}/${clickedId}`, {
+                            method: "POST",
+                            body: data
+                        }).then((response) => {
+                            if (response.ok) {
+                                return response.json();
+                            }
+                        }).then((data) => {
+                            console.log("sent with success");
+                            document.getElementById("sendMessageForm").reset();
+                        });
+                    }
+                });
+
                 socket.on(`Message${localStorage.getItem("id")}`, function (data) {
                     console.log("Sent a new message:" + data.message.Content);
-                    if ((data.message.senderId===localStorage.getItem("id") && data.message.ReceiverId===clickedId) || (data.message.senderId===clickedId && data.message.ReceiverId===localStorage.getItem("id")))
-                    {
+                    if ((data.message.senderId === localStorage.getItem("id") && data.message.ReceiverId === clickedId) || (data.message.senderId === clickedId && data.message.ReceiverId === localStorage.getItem("id"))) {
                         var messageList = document.getElementById("message-list");
-                    const liElement = document.createElement("li");
-                        liElement.className = data.message.senderId==localStorage.getItem("id")? "media sent" :"media received";
+                        const liElement = document.createElement("li");
+                        liElement.className = data.message.senderId == localStorage.getItem("id") ? "media sent" : "media received";
 
 
 
@@ -378,8 +441,44 @@
                         msgBoxDiv.className = "msg-box";
                         const outsideDiv = document.createElement("div")
 
+                        const pdfContainer = document.createElement("div");
+                        pdfContainer.className="pdfCont"
+                        
+
                         const messageText = document.createElement("p");
-                        messageText.textContent = data.message.Content;
+            
+                        var pdfname = data.message.PDFFile.split(".")[0]
+                        const pdfExt = data.message.PDFFile.split(".")[1]
+                        var a = document.createElement("a")
+                        a.href = `http://localhost:1337/images/${pdfname}/${pdfExt}`
+                        a.textContent = `${data.message.PDFName}`;
+                        a.download = `http://localhost:1337/images/${pdfname}/${pdfExt}`;
+                        a.style.textDecoration = "none";
+                        a.style.color = "#007BFF";
+                        a.style.backgroundColor = "#F8F9FA";
+                        a.style.padding = "8px 12px";
+                        a.style.borderRadius = "4px";
+                        a.style.border = "1px solid #CCCCCC";
+                        a.style.fontWeight = "bold";
+                        a.style.marginLeft = "10px"
+                        var pdfIcon = document.createElement("img");
+                        pdfIcon.src = "../dependencies/icons/pdf.png"; 
+                        pdfIcon.alt = "PDF Icon";
+                        pdfIcon.style.width = "25px"; 
+                        pdfIcon.style.marginRight = "5px";
+                        pdfIcon.style.marginLeft = "5px";
+                        pdfContainer.appendChild(pdfIcon)
+                        pdfContainer.appendChild(a)
+
+
+
+
+                        if (data.message.PDFFile === "") {
+                            messageText.textContent = data.message.Content;
+                        } else {
+                            messageText.textContent = data.message.Content;
+                            messageText.appendChild(pdfContainer); // Append the <a> element to the paragraph
+                        }
 
                         const chatTimeSpan = document.createElement("span");
                         chatTimeSpan.className = "chat-time";
@@ -389,7 +488,7 @@
                         chatTimeSpan.textContent = timestamp2;
 
                         const arrowTriangleWrapDiv = document.createElement("div");
-                        arrowTriangleWrapDiv.className = data.message.senderId===localStorage.getItem("id")? "arrow-triangle-wrap" : "arrow-triangle right";
+                        arrowTriangleWrapDiv.className = data.message.senderId === localStorage.getItem("id") ? "arrow-triangle-wrap" : "arrow-triangle right";
 
                         const arrowTriangleDiv = document.createElement("div");
                         arrowTriangleDiv.className = "arrow-triangle left"
@@ -407,11 +506,11 @@
                         messageList.appendChild(liElement);
 
                     }
-                    
-                    
+
+
                     // Add your code to display the new message here
                 });
-               
+
 
             })
 

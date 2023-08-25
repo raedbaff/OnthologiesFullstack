@@ -62,9 +62,9 @@ License: You must have a valid license purchased only from templatemonster to le
                     <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="feather-icon"><i data-feather="bell"></i></span><span class="badge-wrap"><span class="badge badge-primary badge-indicator badge-indicator-sm badge-pill pulse"></span></span></a>
                     <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                         <h6 class="dropdown-header">Notifications <a href="javascript:void(0);" class="">View all</a></h6>
-                        <div class="notifications-nicescroll-bar">
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <div class="media">
+                        <div id="notificationCenter" class="notifications-nicescroll-bar">
+                            <!-- <a href="javascript:void(0);" class="dropdown-item"> -->
+                                <!-- <div class="media">
                                     <div class="media-img-wrap">
                                         <div class="avatar avatar-sm">
                                             <img src="../dependencies/dist/img/avatar1.jpg" alt="user" class="avatar-img rounded-circle">
@@ -76,78 +76,10 @@ License: You must have a valid license purchased only from templatemonster to le
                                             <div class="notifications-time">12m</div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </div> -->
+                            <!-- </a> -->
                             <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <div class="media">
-                                    <div class="media-img-wrap">
-                                        <div class="avatar avatar-sm">
-                                            <img src="../dependencies/dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div>
-                                            <div class="notifications-text">New message received from <span class="text-dark text-capitalize">Misuko Heid</span></div>
-                                            <div class="notifications-time">1h</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <div class="media">
-                                    <div class="media-img-wrap">
-                                        <div class="avatar avatar-sm">
-                                            <span class="avatar-text avatar-text-primary rounded-circle">
-													<span class="initial-wrap"><span><i class="zmdi zmdi-account font-18"></i></span></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div>
-                                            <div class="notifications-text">You have a follow up with<span class="text-dark text-capitalize"> Mintos head</span> on <span class="text-dark text-capitalize">friday, dec 19</span> at <span class="text-dark">10.00 am</span></div>
-                                            <div class="notifications-time">2d</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <div class="media">
-                                    <div class="media-img-wrap">
-                                        <div class="avatar avatar-sm">
-                                            <span class="avatar-text avatar-text-success rounded-circle">
-													<span class="initial-wrap"><span>A</span></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div>
-                                            <div class="notifications-text">Application of <span class="text-dark text-capitalize">Sarah Williams</span> is waiting for your approval</div>
-                                            <div class="notifications-time">1w</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <div class="media">
-                                    <div class="media-img-wrap">
-                                        <div class="avatar avatar-sm">
-                                            <span class="avatar-text avatar-text-warning rounded-circle">
-													<span class="initial-wrap"><span><i class="zmdi zmdi-notifications font-18"></i></span></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div>
-                                            <div class="notifications-text">Last 2 days left for the project</div>
-                                            <div class="notifications-time">15d</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                            
                         </div>
                     </div>
                 </li>
@@ -679,6 +611,78 @@ License: You must have a valid license purchased only from templatemonster to le
             <img class="d-none" src="../dependencies/dist/img/logo-light.png" alt="brand" />
             <img class="d-none" src="../dependencies/dist/img/logo-dark.png" alt="brand" />
         </div>
+        <script type="text/javascript" src="../dependencies/sails.io.js"></script>
+        <script type="text/javascript">
+        // Configure Sails socket client
+        io.sails.url = 'http://localhost:1337'; // Change to your server URL
+        io.sails.autoConnect = true; // Automatically connect
+    </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("layout script working ")
+                var socket = io.sails.connect();
+                socket.on('connect', function () {
+                    console.log("connected from layout a papi");
+                })
+                socket.on(`Message${localStorage.getItem("id")}`, function (data) {
+                    console.log("NOTIFCATION CENTER FROM LAYOUT" + data.message.notification);
+                    if (data.message.ReceiverId === localStorage.getItem("id")){
+                        const div = document.createElement("div");
+                    div.className = "media";
+
+                    const mediaImgWrap = document.createElement("div");
+                    mediaImgWrap.className = "media-img-wrap";
+
+                    const avatarSm = document.createElement("div");
+                    avatarSm.className = "avatar avatar-sm";
+
+                    const img = document.createElement("img");
+                    img.src = "../dependencies/dist/img/avatar1.jpg";
+                    img.alt = "user";
+                    img.className = "avatar-img rounded-circle";
+
+                    avatarSm.appendChild(img);
+                    mediaImgWrap.appendChild(avatarSm);
+
+                    const mediaBody = document.createElement("div");
+                    mediaBody.className = "media-body";
+
+                    const divInner = document.createElement("div");
+
+                    const notificationsText = document.createElement("div");
+                    notificationsText.className = "notifications-text";
+                    notificationsText.innerHTML = `${data.message.notification}`;
+
+                    const notificationsTime = document.createElement("div");
+                    notificationsTime.className = "notifications-time";
+                    notificationsTime.textContent = "12m";
+
+                    divInner.appendChild(notificationsText);
+                    divInner.appendChild(notificationsTime);
+                    mediaBody.appendChild(divInner);
+
+                    div.appendChild(mediaImgWrap);
+                    div.appendChild(mediaBody);
+                    var a=document.createElement("a")
+                    a.href="javascript:void(0);"
+                    a.className="dropdown-item"
+                    a.appendChild(div)
+
+                    // Add the new message to the appropriate container on your page
+                    // For example, if you have a notifications container with an ID "notificationsContainer":
+                    const notificationsContainer = document.getElementById("notificationCenter");
+                    notificationsContainer.appendChild(a);
+
+                    }
+                    
+                    
+
+
+                    // Add your code to display the new message here
+                });
+            })
+        
+        </script>
         <!-- /Setting Panel -->
 
         <!-- Main Content -->

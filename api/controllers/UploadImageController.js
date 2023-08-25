@@ -63,6 +63,57 @@ WHERE {
       return res.serverError("Failed to upload image.");
     }
   },
+  async uploadPDF (req, res) {
+    
+    try {
+        
+        const id = uuidv4();
+      req.file('pdf').upload({ dirname: require('path').resolve(sails.config.appPath, 'uploads') }, async function (err, uploadedFiles) {
+        if (err) {
+          return res.serverError(err);
+        }
+        const tmpFilePath = uploadedFiles[0].fd;
+        const parts = tmpFilePath.split('\\');
+        const uuidPart = parts.pop();
+
+        console.log("Uploaded Files:", uuidPart);
+        
+
+        if (uploadedFiles.length === 0) {
+          return res.badRequest('No file uploaded.');
+        }
+
+        const filename = `${id}`+uploadedFiles[0].filename;
+
+        // Perform the SPARQL insert
+        const sparqlQuery = `
+        PREFIX pdf: <http://pdf.org/>
+
+
+INSERT DATA {
+
+  pdf:PDF${id} pdf:PDFFile "${uuidPart}" .
+
+}   
+       `;
+
+       
+        try {
+          const response = await axios.post(endpoint, sparqlQuery, {
+            headers: {
+              "Content-Type": "application/sparql-update",
+            },
+          });
+
+          return res.ok(`PDF ${filename} uploaded and data inserted successfully.`);
+        } catch (error) {
+          return res.serverError("Failed to insert data into Fuseki.");
+        }
+      });
+    } catch (error) {
+      return res.serverError("Failed to upload PDF.");
+    }
+  },
    async getImage (req, res) {
     const { filename,ext} = req.params;
     const thing="raed.jpg"

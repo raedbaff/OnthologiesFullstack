@@ -19480,6 +19480,7 @@ table.dataTable {
           padding: 10px 15px;
           border-radius: .25rem;
           display: inline-block;
+          width: 300px;
           position: relative; }
           .chatapp-wrap .chatapp-right .chat-body .media .media-body .msg-box > div p {
             color: #324148; }
