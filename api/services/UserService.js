@@ -8,38 +8,9 @@ const nodemailer = require("nodemailer");
 const uuidv4 = require("uuid").v4;
 
 module.exports = {
-  // async sendMail(email,confirmationToken) {
-  //     console.log("sending mail now ...")
-  //       // Replace these with your actual Mailtrap credentials
-  //       const SMTP_HOST = "sandbox.smtp.mailtrap.io";
-  //       const SMTP_PORT = 587;
-  //       const SMTP_USERNAME = "f2bfa53293821e";
-  //       const SMTP_PASSWORD = "8f1f274808ed1b";
+ 
 
-  //       const transporter = nodemailer.createTransport({
-  //         host: SMTP_HOST,
-  //         port: SMTP_PORT,
-  //         auth: {
-  //           user: SMTP_USERNAME,
-  //           pass: SMTP_PASSWORD,
-  //         },
-  //       });
-  //       const confirmationLink = `http://localhost:1337/confirm/${confirmationToken}`;
-  //       const mailOptions = {
-  //         from: "raedbaffoun90@gmail.com",
-  //         to: email, //
-  //         subject: "Hello World",
-  //         html: `Click the following link to confirm your account: <a href="${confirmationLink}">Confirm account</a>`,
-  //       };
 
-  //       transporter.sendMail(mailOptions, (error, info) => {
-  //         if (error) {
-  //           console.log("Error sending email:", error);
-  //         } else {
-  //           console.log("Email sent:", info.response);
-  //         }
-  //       });
-  //     },
 
   async register(username, email, password) {
     const sparqlEndpoint = "http://localhost:3030/my_dataset/update";
@@ -69,17 +40,17 @@ module.exports = {
       const confirmationLink = `http://localhost:1337/confirm/${confirmationToken}`;
       const transporter = nodemailer.createTransport({
         host: "smtp.elasticemail.com",
-        port: 465, // Use the port provided by Elastic Email
-        secure: true, // Set this to true if using port 465
+        port: 465, 
+        secure: true, 
         auth: {
-          user: "raedbaffoun90@gmail.com",
-          pass: "AEF27A90EB6C895A8AFDEA3F023239A57F9A",
+          user: "YOUR_EMAIL",
+          pass: "YOUR_PASSWORD",
         },
       });
 
       // Define the email data
       const mailOptions = {
-        from: "raedbaffoun90@gmail.com",
+        from: "YOUR_EMAIL",
         to: email,
         subject: "Account confirmation",
         html: `Click the following link to confirm your account: <a href="${confirmationLink}">Confirm account</a>`,
