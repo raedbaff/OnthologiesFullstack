@@ -58,8 +58,8 @@ License: You must have a valid license purchased only from templatemonster to le
                 <li class="nav-item">
                     <a id="settings_toggle_btn" class="nav-link nav-link-hover" href="javascript:void(0);"><span class="feather-icon"><i data-feather="settings"></i></span></a>
                 </li>
-                <li class="nav-item dropdown dropdown-notifications">
-                    <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="feather-icon"><i data-feather="bell"></i></span><span class="badge-wrap"><span class="badge badge-primary badge-indicator badge-indicator-sm badge-pill pulse"></span></span></a>
+                <li id="notificationPulse" class="nav-item dropdown dropdown-notifications">
+                    <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="feather-icon"><i data-feather="bell"></i></span><span class="badge-wrap"><span id="pulseSpan" class="badge badge-primary badge-indicator badge-indicator-sm badge-pill "></span></span></a>
                     <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                         <h6 class="dropdown-header">Notifications <a href="javascript:void(0);" class="">View all</a></h6>
                         <div id="notificationCenter" class="notifications-nicescroll-bar">
@@ -619,6 +619,9 @@ License: You must have a valid license purchased only from templatemonster to le
     </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
+                const pulseElement=document.getElementById("pulseSpan")
+                
+                
                 console.log("layout script working ")
                 var socket = io.sails.connect();
                 socket.on('connect', function () {
@@ -629,6 +632,7 @@ License: You must have a valid license purchased only from templatemonster to le
                     if (data.message.ReceiverId === localStorage.getItem("id")){
                         const div = document.createElement("div");
                     div.className = "media";
+                    pulseElement.classList.add("pulse")
 
                     const mediaImgWrap = document.createElement("div");
                     mediaImgWrap.className = "media-img-wrap";
@@ -637,7 +641,10 @@ License: You must have a valid license purchased only from templatemonster to le
                     avatarSm.className = "avatar avatar-sm";
 
                     const img = document.createElement("img");
-                    img.src = "../dependencies/dist/img/avatar1.jpg";
+                    const dbimg=data.message.senderPhoto
+                    imagename=dbimg.split(".")[0]
+                    ext=dbimg.split(".")[1]
+                    img.src = `http://localhost:1337/images/${imagename}/${ext}`;
                     img.alt = "user";
                     img.className = "avatar-img rounded-circle";
 
@@ -655,7 +662,10 @@ License: You must have a valid license purchased only from templatemonster to le
 
                     const notificationsTime = document.createElement("div");
                     notificationsTime.className = "notifications-time";
-                    notificationsTime.textContent = "12m";
+                    var theTime=data.message.timestamp.split("T")[1].split(".")[0]
+                    var currentTime=new Date()
+                    console.log("current time : "+currentTime)
+                    notificationsTime.textContent = theTime;
 
                     divInner.appendChild(notificationsText);
                     divInner.appendChild(notificationsTime);
@@ -664,10 +674,10 @@ License: You must have a valid license purchased only from templatemonster to le
                     div.appendChild(mediaImgWrap);
                     div.appendChild(mediaBody);
                     var a=document.createElement("a")
-                    a.href="javascript:void(0);"
+                    a.href=`/chat?Userid=${data.message.senderId}&Username=${data.message.senderUsername}&UserPhoto=${data.message.senderPhoto}`
                     a.className="dropdown-item"
-                    a.appendChild(div)
-
+                    a.appendChild(div);
+                    
                     // Add the new message to the appropriate container on your page
                     // For example, if you have a notifications container with an ID "notificationsContainer":
                     const notificationsContainer = document.getElementById("notificationCenter");

@@ -3,7 +3,7 @@ const { default: axios } = require("axios");
 const sparqlEndpoint = "http://localhost:3030/my_dataset/update";
 const FetchsparqlEndpoint = "http://localhost:3030/my_dataset/query";
 module.exports = {
-  async SendMessage(senderId, ReceiverId, Content,PDFFile,PDFName) {
+  async SendMessage(senderId, ReceiverId, Content,PDFFile,PDFName,senderUsername,senderPhoto) {
     try {
       const messageId = uuidv4();
       var timestamp = new Date().toISOString();
@@ -23,12 +23,14 @@ module.exports = {
               `;
       var message = {
         senderId,
+        senderUsername,
+        senderPhoto,
         ReceiverId,
         Content,
         PDFFile,
         PDFName,
         timestamp,
-        notification:"You have received a new message "
+        notification:`${senderUsername} sent you a new message !`
       };
       await sails.io.sockets.emit(`Message${ReceiverId}`, { message: message });
       await sails.io.sockets.emit(`Message${senderId}`, { message: message });

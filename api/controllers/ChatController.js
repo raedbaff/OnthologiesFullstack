@@ -3,7 +3,7 @@ const path=require('path')
 module.exports={
     async CreateMessage(req,res){
         const {senderId,ReceiverId}=req.params
-        const {Content}=req.body
+        const {Content,senderUsername,senderPhoto}=req.body
         let PDFFile=""
         let PDFName=""
         
@@ -19,14 +19,14 @@ module.exports={
                     PDFName=uploadedFiles[0].filename
             
                     console.log("Uploaded Files:", PDFFile);
-                    await chatService.SendMessage(senderId,ReceiverId,Content,PDFFile,PDFName)
+                    await chatService.SendMessage(senderId,ReceiverId,Content,PDFFile,PDFName,senderUsername,senderPhoto)
             return res.status(200).json({message:"Message sent successfully"})
 
                 } else {
                     PDFFile=""
                     PDFName=""
                     console.log("Uploaded Files:", PDFFile);
-                    await chatService.SendMessage(senderId,ReceiverId,Content,PDFFile,PDFName)
+                    await chatService.SendMessage(senderId,ReceiverId,Content,PDFFile,PDFName,senderUsername,senderPhoto)
             return res.status(200).json({message:"Message sent successfully"})
 
                 }
