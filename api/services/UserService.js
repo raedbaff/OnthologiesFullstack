@@ -56,7 +56,7 @@ module.exports = {
               ex:password "${password}";
               ex:confirmationToken "${confirmationToken}";
               ex:photo "avatarEmpty.jpg";
-              ex:isConfirmed "true" .
+              ex:isConfirmed "false" .
               
               
             }
